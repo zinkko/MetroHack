@@ -16,11 +16,11 @@ import java.util.Map;
  *
  * @author ilari
  */
-public class MetroKartta {
+public class Metrokartta {
     private Map<Taso,List<Linja>> yhteydet;
     private List<Linja> metroLinjat;
     
-    public MetroKartta(){
+    public Metrokartta(){
         this.yhteydet = new HashMap<>();
         this.metroLinjat = new ArrayList<>();
     }
