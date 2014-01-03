@@ -6,6 +6,7 @@
 
 package metrohack.maailma;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,9 +17,15 @@ public class Taso {
     private String name;
     private List<Huone> huoneet;
     private List<Hahmo> hahmot;
+    private List<Linja> metrot;
     
     public Taso(){
         this.name = "Ankkalan metro";
+        this.metrot = new LinkedList<>();
+    }
+    
+    public List<Linja> getMetroLinjat(){
+        return this.metrot;
     }
     
     public void piirra(char[][] map){

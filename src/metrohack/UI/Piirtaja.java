@@ -30,7 +30,16 @@ public class Piirtaja {
         this.paneeli = paneeli;
     }
     
-    public String piirra(){
+    public void piirra(){
+        if (this.piirtoAlusta==null){
+            // graafinen
+        }else{
+            this.piirtoAlusta.setText(this.luoTekstiKuva());
+        }
+    }
+    
+    
+    private String luoTekstiKuva(){
         String kuva = "";
         Taso taso = peli.getCurrentLevel();
         taso.piirra(map); // täytä kartta
