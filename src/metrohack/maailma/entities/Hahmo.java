@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
-package metrohack.maailma;
+package metrohack.maailma.entities;
+
+import metrohack.maailma.Tiili;
 
 /**
  *

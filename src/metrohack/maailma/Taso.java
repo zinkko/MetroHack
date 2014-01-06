@@ -6,6 +6,7 @@
 
 package metrohack.maailma;
 
+import metrohack.maailma.entities.Hahmo;
 import java.util.LinkedList;
 import java.util.List;
 
