@@ -66,8 +66,6 @@ public class Piirtaja {
     
     private void paivitaHahmot(){
         peli.getPelaaja().piirra(map);
-        for (Hahmo h: peli.getCurrentLevel().getHahmot()){
-            h.piirra(map);
-        }
+
     }
 }
