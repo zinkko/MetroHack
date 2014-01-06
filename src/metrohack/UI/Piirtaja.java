@@ -52,7 +52,7 @@ public class Piirtaja {
                 if (c=='\u0000'){
                     c = ' ';
                 }
-                kuva = kuva + c + " ";
+                kuva = kuva + c;
             }
             kuva = kuva + "\n";
         }
