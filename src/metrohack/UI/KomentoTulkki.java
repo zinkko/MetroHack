@@ -16,6 +16,8 @@ import metrohack.maailma.entities.Pelaaja;
 public class KomentoTulkki {
     
     private static String MOVE_CHARS = "wasd";
+    
+    
     private MetroHack peli;
     
     public KomentoTulkki(MetroHack peli){

@@ -34,6 +34,10 @@ public class Taso {
         return this.metrot;
     }
     
+    public List<Hahmo> getHahmot(){
+        return this.hahmot;
+    }
+    
     public void piirra(char[][] map){
         for (Huone h:huoneet){
             h.piirra(map);

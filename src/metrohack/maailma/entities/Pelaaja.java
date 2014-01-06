@@ -16,6 +16,7 @@ public class Pelaaja extends Hahmo{
 		super(vitutus, nimi, x, y);
 		this.ruoka = 10;
 		this.reppu = new Reppu(10, 10);
+                this.merkki = '@';
 	}
 	
 	public void metodi(){
