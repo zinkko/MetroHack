@@ -14,13 +14,21 @@ import metrohack.maailma.Tiili;
  */
 public abstract class Hahmo {
     
-    private Tiili paikka;
-    private int x,y;
-    private char merkki;
-    
-    public Hahmo(){
-        this.merkki = '@';
+    protected Tiili paikka;
+    protected char merkki;
+    protected String nimi;
+    protected int vitutus; //hit points (HP!!)
+    protected int x;
+    protected int y;
+	
+    public Hahmo(int vitutus, String nimi, int x, int y){
+		this.vitutus = vitutus;
+		this.nimi = nimi;
+		this.x = x;
+		this.y = y;
     }
+	
+
     
     public void piirra(char[][] map){
         map[x][y] = merkki;

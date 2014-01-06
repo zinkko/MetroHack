@@ -33,7 +33,7 @@ public class UserInterface implements Runnable{
     
     @Override
     public void run(){
-        frame.setPreferredSize(new Dimension(500,500));
+        frame.setPreferredSize(new Dimension(800,600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         if (this.isTextBased){

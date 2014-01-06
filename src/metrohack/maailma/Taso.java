@@ -20,9 +20,14 @@ public class Taso {
     private List<Hahmo> hahmot;
     private List<Linja> metrot;
     
-    public Taso(){
+    public Taso(int huoneidenMaara){
         this.name = "Ankkalan metro";
         this.metrot = new LinkedList<>();
+        luoTaso(huoneidenMaara);
+    }
+    
+    private void luoTaso(int huoneidenMaara){
+        
     }
     
     public List<Linja> getMetroLinjat(){
