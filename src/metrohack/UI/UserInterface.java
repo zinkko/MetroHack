@@ -57,10 +57,11 @@ public class UserInterface implements Runnable{
         JTextArea tekstikentta = new JTextArea();
         KomentoTulkki t = new KomentoTulkki(peli);
         Kuuntelija k = new Kuuntelija(t);
+        tekstikentta.setText("Hello World");
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
         c.add(tekstikentta);
-        this.piirtaja = new Piirtaja(tekstikentta,500,500);
+        this.piirtaja = new Piirtaja(tekstikentta,100,100);
     }
    
     /**

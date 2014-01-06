@@ -6,8 +6,10 @@
 
 package metrohack;
 
+import java.util.LinkedList;
 import javax.swing.SwingUtilities;
 import metrohack.UI.UserInterface;
+import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
 
 
@@ -21,6 +23,7 @@ public class MetroHack{
 
     private UserInterface ui;
     private Pelaaja pelaaja;
+    private Taso tasoNyt;
     
     public MetroHack(boolean textBased){
         this.ui = new UserInterface(this,textBased);
@@ -38,7 +41,8 @@ public class MetroHack{
     
 
     private void luoEkaTaso(){ // korvaa jollain myöhemmin
-        
+        Taso ekaTaso = new Taso(1,true,new LinkedList<Linja>());
+        tasoNyt = ekaTaso;
     }
     
     private void vuoro(){
@@ -51,7 +55,11 @@ public class MetroHack{
     }
     
     public Taso getCurrentLevel(){
-        return null;
+        return tasoNyt;
+    }
+    
+    public void piirra(){
+        this.ui.piirra();
     }
     
 }

@@ -30,6 +30,7 @@ public class KomentoTulkki {
         if(KomentoTulkki.MOVE_CHARS.contains(komento)){
             moveCommand(komento);
         }// lisää vaihtoehtoja
+        this.peli.piirra();
     }
     
     private void moveCommand(String komento){
