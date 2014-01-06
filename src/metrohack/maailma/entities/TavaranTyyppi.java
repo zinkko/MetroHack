@@ -10,6 +10,6 @@ package metrohack.maailma.entities;
  */
 public enum TavaranTyyppi {
 
-	LIPPU, RUOKA, SUOJA, MUU;
+	LIPPU, RUOKA, SUOJA, MUU,JUOTAVA;
 }
 

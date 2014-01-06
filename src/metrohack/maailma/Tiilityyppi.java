@@ -11,12 +11,12 @@ package metrohack.maailma;
  * @author ilari
  */
    
-public enum TiilinTyyppi{
+public enum Tiilityyppi{
     LATTIA('.'),SEINA('#'),OVI('+'),LAITURI('=');
 
     private final char kuva;
 
-    private TiilinTyyppi(char kuva){
+    private Tiilityyppi(char kuva){
         this.kuva = kuva;
     }
 

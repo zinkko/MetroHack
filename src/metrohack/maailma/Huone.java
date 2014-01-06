@@ -26,29 +26,29 @@ public class Huone {
         this.y=y;
         this.pituus = pituus;
         this.leveys = leveys;
-        this.osat = luoHuone(pituus,leveys);
+        this.osat = luoTyhjaHuone(pituus,leveys);
         this.viereiset = new LinkedList<>();
     }
     
-    public Huone(List<Tiili> osat,int p, int l,int x, int y){
+    public Huone(List<Tiili> huone,int p, int l,int x, int y){
         this.pituus = p;
         this.leveys = l;
         this.x = x;
         this.y = y;
-        this.osat = osat;
+        this.osat = huone;
     }
     
-    private List<Tiili> luoHuone(int pituus, int leveys){
+    private List<Tiili> luoTyhjaHuone(int pituus, int leveys){
         List<Tiili> ret = new LinkedList<>();
-        TiilinTyyppi nxt;
+        Tiilityyppi nxt;
         for (int i=this.x;i<this.x+this.pituus;i++){
             for (int j=this.y;j<this.y+this.leveys;j++){
                 if (i==this.x || j==this.y || i==this.x+this.pituus-1
                         || j==this.y+this.leveys-1){
-                    nxt = TiilinTyyppi.SEINA;
+                    nxt = Tiilityyppi.SEINA;
                 }
                 else{
-                    nxt = TiilinTyyppi.LATTIA;
+                    nxt = Tiilityyppi.LATTIA;
                 }
                 ret.add(new Tiili(i,j,nxt));
             }

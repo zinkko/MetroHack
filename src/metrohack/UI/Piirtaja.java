@@ -15,14 +15,15 @@ import metrohack.MetroHack;
  * @author ilari
  */
 public class Piirtaja {
+    private int width,height;
     private MetroHack peli;
-    private char[][] map;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
     
     public Piirtaja(JTextArea teksti,int w, int h, MetroHack peli){
         this.piirtoAlusta = teksti;
-        this.map = new char[w][h];
+        this.width = w;
+        this.height = h;
         this.peli = peli;
     }
     
@@ -34,17 +35,17 @@ public class Piirtaja {
         if (this.piirtoAlusta==null){
             // graafinen
         }else{
-            System.out.println("'sup");
-            this.piirtoAlusta.setText(this.luoTekstiKuva());
+            char[][] map = new char[this.width][this.height];
+            this.piirtoAlusta.setText(this.luoTekstiKuva(map));
         }
     }
     
     /**
      * @return kuva tekstimuodossa 
      */
-    private String luoTekstiKuva(){
+    private String luoTekstiKuva(char[][] map){
         String kuva = "";
-        piirraAsiat();
+        piirraAsiat(map);
         
         for (char[] taul:map){
             for (char c : taul){
@@ -60,25 +61,25 @@ public class Piirtaja {
     }
     
     
-    private void piirraAsiat(){
+    private void piirraAsiat(char[][] map){
         //piirrä alle
-        this.paivitaHuoneet();
-        this.paivitaHahmot();
-        this.piirraAnkka();
+        this.paivitaHuoneet(map);
+        this.paivitaHahmot(map);
+        this.piirraAnkka(map);
         // piirrä päälle
     }
     
-    private void paivitaHuoneet(){
+    private void paivitaHuoneet(char[][] map){
 
         peli.getCurrentLevel().piirra(map);
     }
     
-    private void paivitaHahmot(){
+    private void paivitaHahmot(char[][] map){
         peli.getPelaaja().piirra(map);
 
     }
     
-    private void piirraAnkka(){
+    private void piirraAnkka(char[][] map){
         if (map==null){
             this.piirtoAlusta.setText("wtf???");
             return;

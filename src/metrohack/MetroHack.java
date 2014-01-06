@@ -28,7 +28,7 @@ public class MetroHack{
     
     public MetroHack(){
         //this.ui = new UserInterface(this,textBased);
-        this.pelaaja = new Pelaaja(10, "Pentti", 50,50);
+        this.pelaaja = new Pelaaja(10, "Pentti", 12,12);
         this.luoEkaTaso();
     }
     

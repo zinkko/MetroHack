@@ -13,9 +13,9 @@ package metrohack.maailma;
 public class Tiili {
     private final int x,y;
     private char kuva; 
-    private final TiilinTyyppi tyyppi;
+    private final Tiilityyppi tyyppi;
     
-    public Tiili(int x, int y, TiilinTyyppi t){
+    public Tiili(int x, int y, Tiilityyppi t){
         this.x = x;
         this.y = y;
         this.tyyppi = t;

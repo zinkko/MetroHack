@@ -10,6 +10,7 @@ package metrohack.maailma.entities;
  */
 import static metrohack.maailma.entities.TavaranTyyppi.*;
 import java.util.Random;
+
 public class Tavara{
 	protected String nimi;
 	protected String kuvaus;

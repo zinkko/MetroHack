@@ -37,19 +37,19 @@ public class KomentoTulkki {
         Pelaaja pelaaja = this.peli.getPelaaja();
         int dx,dy;
         switch(komento){
-            case "w":
+            case "a":
                 dx=0;
                 dy=-1;
+                break;
+            case "d":
+                dx=0;
+                dy=1;
                 break;
             case "s":
-                dx=0;
-                dy=-1;
-                break;
-            case "a":
                 dx=1;
                 dy=0;
                 break;
-            case "d":
+            case "w":
                 dx=-1;
                 dy=0;
                 break;
