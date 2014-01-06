@@ -13,13 +13,13 @@ package metrohack.maailma;
 public class Tiili {
     private final int x,y;
     private char kuva; 
-    private final Tyyppi tyyppi;
+    private final TiilinTyyppi tyyppi;
     
-    public Tiili(int x, int y, char kuva, Tyyppi t){
+    public Tiili(int x, int y, TiilinTyyppi t){
         this.x = x;
         this.y = y;
-        this.kuva = kuva;
         this.tyyppi = t;
+        this.kuva = t.getKuva();
     }
     
     public void piirra(char[][] map){
@@ -29,8 +29,5 @@ public class Tiili {
     public void setKuva(char c){
         this.kuva = c;
     }
-    
-    private enum Tyyppi{
-        LATTIA,SEINA,OVI,LAITURI;
-    }
+ 
 }

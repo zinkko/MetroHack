@@ -35,23 +35,23 @@ public class Taso {
         int huoneenLeveys;
         
         for (int i = 0; i<metrot.size(); i++){ //tämä looppi luo metrolaiturit
-            huoneet.add(new Metrolaituri (metrot.get(i), 5, 10));
+            huoneet.add(new Metrolaituri (metrot.get(i), 5, 10,10,10));
             }
         
-     
+        /*
         for (int i = 0; i<huoneidenMaara; i++){ //tämä looppi luo normihuoneet
             millainenHuone = r.nextDouble();
             huoneenKoko = r.nextInt(45)+3;
             
             if (millainenHuone < 0.25){          //tällöin luo pystykäytävä
-                huoneet.add(new Huone(1, huoneenKoko));
+                huoneet.add(new Huone(1, huoneenKoko,1,1));
             } else if (millainenHuone < 0.50){  // tällöin luo vaakasuuntainen käytävä
-                huoneet.add(new Huone(huoneenKoko, 1));
+                huoneet.add(new Huone(huoneenKoko, 1,2,2));
             } else {
                 huoneenLeveys = r.nextInt(45)+3; // muutoin luo tavallisen muotoinen huone
-                huoneet.add(new Huone (huoneenKoko, huoneenLeveys));
+                huoneet.add(new Huone (huoneenKoko, huoneenLeveys,3,3));
             }
-        }
+        }*/
     }
     
     public List<Linja> getMetroLinjat(){

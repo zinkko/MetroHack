@@ -9,7 +9,6 @@ package metrohack.UI;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import metrohack.MetroHack;
-import metrohack.maailma.entities.Hahmo;
 
 /**
  *
@@ -21,9 +20,10 @@ public class Piirtaja {
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
     
-    public Piirtaja(JTextArea teksti,int w, int h){
+    public Piirtaja(JTextArea teksti,int w, int h, MetroHack peli){
         this.piirtoAlusta = teksti;
         this.map = new char[w][h];
+        this.peli = peli;
     }
     
     public Piirtaja(JPanel paneeli){
@@ -62,13 +62,14 @@ public class Piirtaja {
     
     private void piirraAsiat(){
         //piirrä alle
-        //this.paivitaHuoneet();
-        //this.paivitaHahmot();
+        this.paivitaHuoneet();
+        this.paivitaHahmot();
         this.piirraAnkka();
         // piirrä päälle
     }
     
     private void paivitaHuoneet(){
+
         peli.getCurrentLevel().piirra(map);
     }
     
@@ -86,8 +87,8 @@ public class Piirtaja {
         map[4][6] = '^';
         map[4][7] = ')';
         map[4][8] = '>';
-        map[5][2] = '(';
-        for (int i=3;i<7;i++){
+        map[5][3] = '(';
+        for (int i=4;i<7;i++){
             map[5][i] = '_';
         }
         map[5][7] = ')';
