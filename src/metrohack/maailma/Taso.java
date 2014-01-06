@@ -21,8 +21,10 @@ public class Taso {
     
     public Taso(int huoneidenMaara, boolean onkoKauppaa, List<Linja> metrot){
         this.name = "Ankkalan metro";
-        this.metrot = new LinkedList<>();
+        //this.metrot = new LinkedList<>();
         this.metrot = metrot;
+        this.huoneet = new ArrayList<>();
+        this.hahmot = new ArrayList<>();
         luoTaso(huoneidenMaara, onkoKauppaa);
     }
     
