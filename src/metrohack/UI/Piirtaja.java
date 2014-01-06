@@ -18,12 +18,13 @@ import metrohack.maailma.Taso;
 public class Piirtaja {
     private MetroHack peli;
     private char[][] map;
+    private int width, height;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
     
-    public Piirtaja(JTextArea teksti){
+    public Piirtaja(JTextArea teksti,int w, int h){
         this.piirtoAlusta = teksti;
-        
+        this.map = new char[width][height];
     }
     
     public Piirtaja(JPanel paneeli){
@@ -38,18 +39,27 @@ public class Piirtaja {
         }
     }
     
-    
+    /**
+     * @return kuva tekstimuodossa 
+     */
     private String luoTekstiKuva(){
         String kuva = "";
-        Taso taso = peli.getCurrentLevel();
-        taso.piirra(map); // täytä kartta
-        // piirrä kartta
+        //piirrä alle
+        this.paivitaHuoneet();
+        // piirrä muita tärkeitä juttuja päälle
         for (char[] taul:map){
             for (char c : taul){
+                if (c=='\u0000'){
+                    c = ' ';
+                }
                 kuva = kuva + c + " ";
             }
             kuva = kuva + "\n";
         }
         return kuva;
+    }
+    
+    private void paivitaHuoneet(){
+        peli.getCurrentLevel().piirra(map);
     }
 }

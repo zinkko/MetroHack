@@ -15,12 +15,17 @@ import metrohack.maailma.Taso;
  *
  * @author ilari
  */
+import metrohack.maailma.entities.Pelaaja;
+
 public class MetroHack{
 
     private UserInterface ui;
+    private Pelaaja pelaaja;
     
     public MetroHack(boolean textBased){
         this.ui = new UserInterface(this,textBased);
+        this.pelaaja = new Pelaaja(10, "Pentti", 50,50);
+        this.luoEkaTaso();
     }
     
     /**
@@ -29,6 +34,20 @@ public class MetroHack{
     public static void main(String[] args) {
         MetroHack peli = new MetroHack(true);
         SwingUtilities.invokeLater(peli.ui);
+    }
+    
+
+    private void luoEkaTaso(){ // korvaa jollain myöhemmin
+        
+    }
+    
+    private void vuoro(){
+        
+        this.ui.piirra();
+    }
+    
+    public Pelaaja getPelaaja(){
+        return this.pelaaja;
     }
     
     public Taso getCurrentLevel(){

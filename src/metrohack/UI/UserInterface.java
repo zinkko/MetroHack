@@ -60,9 +60,12 @@ public class UserInterface implements Runnable{
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
         c.add(tekstikentta);
-        this.piirtaja = new Piirtaja(tekstikentta);
+        this.piirtaja = new Piirtaja(tekstikentta,500,500);
     }
-    
+   
+    /**
+     * piirrä peli
+     */
     public void piirra(){
         this.piirtaja.piirra();
     }

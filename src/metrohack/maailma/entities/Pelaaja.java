@@ -20,5 +20,10 @@ public class Pelaaja extends Hahmo{
 	
 	public void metodi(){
 	}
+        
+        public void liiku(int dx, int dy){
+            this.x += dx;
+            this.y += dy;
+        }
 
 }
