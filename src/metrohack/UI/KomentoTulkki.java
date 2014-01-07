@@ -15,7 +15,7 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class KomentoTulkki {
     
-    private static String MOVE_CHARS = "wasd";
+    private static String MOVE_CHARS = "ikjluom.";
     
     
     private MetroHack peli;
@@ -30,6 +30,7 @@ public class KomentoTulkki {
         if(KomentoTulkki.MOVE_CHARS.contains(komento)){
             moveCommand(komento);
         }// lisää vaihtoehtoja
+        
         this.peli.piirra();
     }
     
@@ -37,22 +38,39 @@ public class KomentoTulkki {
         Pelaaja pelaaja = this.peli.getPelaaja();
         int dx,dy;
         switch(komento){
-            case "a":
+            case "j":
                 dx=0;
                 dy=-1;
                 break;
-            case "d":
+            case "l":
                 dx=0;
                 dy=1;
                 break;
-            case "s":
+            case "k":
                 dx=1;
                 dy=0;
                 break;
-            case "w":
+            case "i":
                 dx=-1;
                 dy=0;
                 break;
+            case "u":
+                dx=-1;
+                dy=-1;
+                break;
+            case ".":
+                dx=1;
+                dy=1;
+                break;
+            case "o":
+                dx=-1;
+                dy=1;
+                break;
+            case "m":
+                dx=1;
+                dy=-1;
+                break;
+                
             default:
                 dx=0;
                 dy=0;

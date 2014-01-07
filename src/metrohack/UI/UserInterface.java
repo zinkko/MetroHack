@@ -63,7 +63,7 @@ public class UserInterface implements Runnable{
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
         c.add(tekstikentta);
-        this.piirtaja = new Piirtaja(tekstikentta,100,100,this.peli);
+        this.piirtaja = new Piirtaja(tekstikentta,30,100,this.peli);
     }
    
     /**
@@ -71,6 +71,15 @@ public class UserInterface implements Runnable{
      */
     public void piirra(){
         this.piirtaja.piirra();
+        this.piirtaja.tulosta(testString());
+    }
+    
+    private String testString(){
+        String ret = "Stuffia riittää:";
+        for (int i=0;i<400;i++){
+            ret += (char) (i+30);
+        }
+        return ret;
     }
 }
 

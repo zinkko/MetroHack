@@ -19,6 +19,7 @@ public class Piirtaja {
     private MetroHack peli;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
+    private int tulostusRivi = 25; // 
     
     public Piirtaja(JTextArea teksti,int w, int h, MetroHack peli){
         this.piirtoAlusta = teksti;
@@ -40,13 +41,16 @@ public class Piirtaja {
         }
     }
     
+    public void piirra(char[][] map){
+        this.piirtoAlusta.setText(this.luoTekstiKuva(map));
+    }
+    
     /**
      * @return kuva tekstimuodossa 
      */
     private String luoTekstiKuva(char[][] map){
         String kuva = "";
         piirraAsiat(map);
-        
         for (char[] taul:map){
             for (char c : taul){
                 
@@ -60,6 +64,20 @@ public class Piirtaja {
         return kuva;
     }
     
+    public void tulosta(String teksti){
+        char[][] map = new char[width][height];
+        int rivi = this.tulostusRivi;
+        int j = 0;
+        for (int i=0;i<teksti.length();i++){
+            j=i%this.height;
+            if (i!= 0 && j==0){
+                rivi++;
+            }
+            map[rivi][j] = teksti.charAt(i);
+        }
+        this.piirra(map);
+        
+    }
     
     private void piirraAsiat(char[][] map){
         //piirrä alle
