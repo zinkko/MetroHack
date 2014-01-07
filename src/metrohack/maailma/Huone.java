@@ -57,6 +57,12 @@ public class Huone {
         return ret;
     }
     
+    
+    
+    public int[] getSijainti(){
+        return new int[]{x, y};
+    }
+    
     public void piirra(char[][] map){
         for (Tiili t : osat){
             t.piirra(map);
