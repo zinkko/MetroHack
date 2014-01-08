@@ -75,20 +75,62 @@ public class Taso {
     public int[] sijoitaHuone(int monesko, int pituus, int leveys){
         int[] sijainti = new int[2];
         Random r = new Random();
-        int x = r.nextInt(50); //tiilien määrä
-        int y = r.nextInt(80);
-        if (monesko==0){    //jos kyseessä eka huone, sijoita randomilla
-            sijainti[0] = x;
-            sijainti[1] = y;
-        } else {
+        while (true){
+            int x = r.nextInt(50); //tiilien määrä
+            int y = r.nextInt(80);
+            Huone h = huoneet.get(monesko-1);
             
+            if (monesko==0){    //jos kyseessä eka huone, sijoita randomilla, tätäkin pitänee kyllä parannella
+                sijainti[0] = x;
+                sijainti[1] = y;
+            } else {
+                List<Tiili> listaOvenPaikoista = huoneet.get(monesko-1).getSeinatiilet();
+                x = r.nextInt(listaOvenPaikoista.size()); //arpoo, minne ovi koitetaan törkätä
+                Tiili ovenpaikka = huoneet.get(monesko-1).getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
+                int ilmansuunta = huoneet.get(monesko-1).MillaSeinallaTiiliOn(ovenpaikka.getX(), ovenpaikka.getY());
+            
+                if (ilmansuunta == 1){
+                    sijainti[0]= h.getX()-pituus;
+                    sijainti[1]= h.getY()-3;
+                } else if (ilmansuunta == 2){
+                    sijainti[0]= huoneet.get(monesko-1).getX() + 1;
+                    sijainti[1]= huoneet.get(monesko-1).getY() + 3; //kovakoodausta, tähän joku satunnaisuus joskus
+                } else if (ilmansuunta == 3){
+                    sijainti[0]= h.getX() + 3;
+                    sijainti[1]=h.getY()+h.getLeveys()-1;
+                } else {
+                    sijainti[0]=h.getX()-3;
+                    sijainti[1]=h.getY()+h.getLeveys()+1;
+               }
+            }
+
+            boolean feilaakoHuoneenSijoitus = false;
+            for (Huone huone: huoneet){
+                for (int i=x; i<x+pituus;i++){
+                    for (int j=y; j<y+pituus;j++){
+                        int[] taulukko = new int[2];
+                        taulukko[0]=i;
+                        taulukko[1]=j;
+                        if (huone.onkoPaallekkain(taulukko)){
+                            feilaakoHuoneenSijoitus = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!feilaakoHuoneenSijoitus){
+                break;
+            }
         }
-        return sijainti;
-    }
+            return sijainti;
+        }
     
     public List<Linja> getMetroLinjat(){
         return this.metrot;
     }
+    
+    
     
     public void piirra(char[][] map){
         for (Huone h:huoneet){
