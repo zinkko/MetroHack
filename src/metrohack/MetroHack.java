@@ -36,8 +36,16 @@ public class MetroHack{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String font;
+        String osName = System.getProperty("os.name");
+        if (osName.equals("Linux")){
+            font = "Courier";
+        }else{
+            font = "Consolas";
+        }
+        // default t textbased UI for now
         MetroHack peli = new MetroHack();
-        peli.ui = new UserInterface(peli,true);
+        peli.ui = new UserInterface(peli,font);
         SwingUtilities.invokeLater(peli.ui);
     }
     

@@ -25,11 +25,17 @@ public class UserInterface implements Runnable{
     private final boolean isTextBased;
     private final MetroHack peli;
     private Piirtaja piirtaja;
+    private String fontName;
     
     public UserInterface(MetroHack peli, boolean isTextBased){
         this.frame = new JFrame();
         this.isTextBased = isTextBased;
         this.peli = peli;     
+    }
+    
+    public UserInterface(MetroHack peli, String fontName){
+        this(peli,true);
+        this.fontName = fontName;
     }
     
     @Override
@@ -58,7 +64,7 @@ public class UserInterface implements Runnable{
         JTextArea tekstikentta = new JTextArea();
         KomentoTulkki t = new KomentoTulkki(peli);
         Kuuntelija k = new Kuuntelija(t);
-        tekstikentta.setFont(new Font("Consolas",Font.PLAIN,17));
+        tekstikentta.setFont(new Font(this.fontName,Font.PLAIN,17));
         tekstikentta.setText("Hello World");
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
