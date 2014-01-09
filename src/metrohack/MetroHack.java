@@ -9,6 +9,7 @@ package metrohack;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.SwingUtilities;
+import metrohack.UI.Piirtaja;
 import metrohack.UI.UserInterface;
 import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
@@ -78,4 +79,7 @@ public class MetroHack{
         this.ui.piirra();
     }
     
+    public Piirtaja getPiirtaja(){
+        return this.ui.getPiirtaja();
+    }
 }

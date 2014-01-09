@@ -22,6 +22,8 @@ public class Piirtaja {
     private JPanel paneeli;
     //private final int tulostusRivi = 25; //
     private String[] print;
+    private String pitkaKomento = "";
+    private boolean enableFriendDuck = false;
     
     public Piirtaja(JTextArea teksti,int w, int h, MetroHack peli){
         this.piirtoAlusta = teksti;
@@ -82,10 +84,23 @@ public class Piirtaja {
     private void piirraAsiat(char[][] map){
         //piirrä alle
         this.paivitaHuoneet(map);
-        this.paivitaHahmot(map);
         this.piirraAnkka(map);
+        this.paivitaHahmot(map);
         this.piirraTulosteet(map);
+        this.piirraStatsit(map);
+        this.piirraTaikoja(map);
         // piirrä päälle
+    }
+    
+    private void piirraStatsit(char[][] map){
+        //List<Stat> stats = this.peli.getPelaaja().getStats();
+        // odottaa implementaatiota...
+    }
+    
+    private void piirraTaikoja(char[][] map){
+        for (int i=0;i<this.pitkaKomento.length();i++){
+            map[0][i] = this.pitkaKomento.charAt(i);
+        }
     }
     
     private void piirraTulosteet(char[][] map){
@@ -107,6 +122,25 @@ public class Piirtaja {
 
     }
     
+    public void piirraYstavaAnkka(){
+         this.enableFriendDuck = true;
+    }
+    
+    private void piirraYstavaAnkka(char[][] map){
+        map[4][10] = '<';
+        map[4][11] = '(';
+        map[4][12] = '^';
+        map[4][13] = ')';
+        map[5][11] = '(';
+        for (int i=12;i<15;i++){
+            map[5][i] = '_';
+        }
+        map[5][15] = ')';
+    }
+    public String getKomento(){
+        return this.pitkaKomento.substring(1);
+    }
+    
     private void piirraAnkka(char[][] map){
         if (map==null){
             this.piirtoAlusta.setText("wtf???");
@@ -121,5 +155,24 @@ public class Piirtaja {
             map[5][i] = '_';
         }
         map[5][7] = ')';
+        
+        if (this.enableFriendDuck){
+            piirraYstavaAnkka(map);
+        }
+    }
+    
+    public void setPitkaKomento(String s){
+        this.pitkaKomento = s;
+        this.piirra();
+    }
+    
+    public void addCharToCmd(char c){
+        this.pitkaKomento += c;
+        this.piirra();
+    }
+    
+    public void backspace(){
+        this.pitkaKomento = this.pitkaKomento.substring(0, this.pitkaKomento.length()-1);
+        this.piirra();
     }
 }

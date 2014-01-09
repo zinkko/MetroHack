@@ -23,7 +23,11 @@ public class Tiili {
     }
     
     public void piirra(char[][] map){
-        map[this.x][this.y] = this.kuva;
+        try{
+            map[this.x][this.y] = this.kuva;
+        }catch(ArrayIndexOutOfBoundsException ex){
+            //
+        }
     }
     
     public void setKuva(char c){

@@ -33,7 +33,6 @@ public class Taso {
                 tiilet.add(new Tiili(i,j, Tiilityyppi.NOLLA));              
             }
         }
-        
         luoTaso(huoneidenMaara, onkoKauppaa);
     }
     

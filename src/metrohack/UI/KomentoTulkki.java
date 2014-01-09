@@ -15,24 +15,60 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class KomentoTulkki {
     
-    private static String MOVE_CHARS = "ikjluom.";
-    
-    
-    private MetroHack peli;
+    private static final String MOVE_CHARS = "ikjluom.";
+    private boolean cmdMode = false;
+    private String komento = "";
+    private final MetroHack peli;
+    private Piirtaja piirtaja;
     
     public KomentoTulkki(MetroHack peli){
         this.peli = peli;
     }
     
     public void give(char cmd){
-        String komento = new String(new char[]{cmd});
+        if (this.piirtaja==null){
+            this.piirtaja=peli.getPiirtaja();
+        }
+        if (this.cmdMode){
+            this.komento(cmd);
+            return;
+        }
+        String command = new String(new char[]{cmd});
         
-        if(KomentoTulkki.MOVE_CHARS.contains(komento)){
-            moveCommand(komento);
-        }// lisää vaihtoehtoja
+        if(KomentoTulkki.MOVE_CHARS.contains(command)){
+            moveCommand(command);
+        }else if (cmd=='$'){
+            this.cmdMode = true;
+            this.komento('$');
+        }
+        // lisää vaihtoehtoja
         
         this.peli.piirra();
     }
+    
+    private void komento(char cmd){
+        if (cmd == '\n'){
+            this.applyCommand(piirtaja.getKomento());
+            this.piirtaja.setPitkaKomento("");
+            this.cmdMode = false;
+        }else if (cmd == '\b'){ // del char
+            this.piirtaja.backspace();
+        }else{
+            this.piirtaja.addCharToCmd(cmd);
+        }
+        System.out.println(cmd);
+    }
+    
+    private void applyCommand(String cmd){
+        System.out.println("command!\nto be implemented...");
+        switch (cmd){
+            case "ankka":
+                this.piirtaja.piirraYstavaAnkka();
+            default:
+                this.piirtaja.tulosta("outo komento :O");
+        }
+    }
+            
     
     private void moveCommand(String komento){
         Pelaaja pelaaja = this.peli.getPelaaja();
@@ -75,7 +111,7 @@ public class KomentoTulkki {
                 dx=0;
                 dy=0;
         }
-        this.peli.tulosta("liikuit suuntaan"+ dx + "," + dy);
+        this.peli.tulosta("liikuit suuntaan "+ dx + "," + dy);
         pelaaja.liiku(dx, dy);
     }
 }
