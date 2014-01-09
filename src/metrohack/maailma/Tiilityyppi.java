@@ -12,7 +12,7 @@ package metrohack.maailma;
  */
    
 public enum Tiilityyppi{
-    LATTIA('.'),SEINA('#'),OVI('+'),LAITURI('=');
+    LATTIA('.'),SEINA('#'),OVI('+'),LAITURI('='), NOLLA(' ');
 
     private final char kuva;
 

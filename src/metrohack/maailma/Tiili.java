@@ -29,5 +29,20 @@ public class Tiili {
     public void setKuva(char c){
         this.kuva = c;
     }
+    
+    public int[] getSijainti(){
+        int[] sijainti = new int[2];
+        sijainti[0]=x;
+        sijainti[1]=y;
+        return sijainti;
+    }
+    
+    public int getX(){
+        return x;
+    }
+    
+    public int getY(){
+        return y;
+    }
  
 }
