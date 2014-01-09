@@ -58,7 +58,7 @@ public class UserInterface implements Runnable{
         JTextArea tekstikentta = new JTextArea();
         KomentoTulkki t = new KomentoTulkki(peli);
         Kuuntelija k = new Kuuntelija(t);
-        tekstikentta.setFont(new Font("Courier",Font.PLAIN,17));
+        tekstikentta.setFont(new Font("Consolas",Font.PLAIN,17));
         tekstikentta.setText("Hello World");
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);

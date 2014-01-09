@@ -28,8 +28,8 @@ public class Taso {
         this.hahmot = new ArrayList<>();
         this.tiilet = new ArrayList<>();
         
-        for (int i = 0; i<50; i++){
-            for (int j = 0; j<80; j++){
+        for (int i = 0; i<35; i++){
+            for (int j = 0; j<25; j++){
                 tiilet.add(new Tiili(i,j, Tiilityyppi.NOLLA));              
             }
         }
@@ -55,9 +55,9 @@ public class Taso {
             
             if (millainenHuone < 0.25){          //tällöin luo pystykäytävä
                 huoneenLeveys = huoneenPituus;
-                huoneenPituus = 1;
+                huoneenPituus = 3;
             } else if (millainenHuone < 0.50){  // tällöin luo vaakasuuntainen käytävä
-                huoneenLeveys = 1;
+                huoneenLeveys = 3;
             } else {
                 huoneenLeveys = r.nextInt(15)+3; // muutoin luo tavallisen muotoinen huone
                 if (onkoKauppaa){
@@ -76,14 +76,15 @@ public class Taso {
         int[] sijainti = new int[2];
         Random r = new Random();
         while (true){
-            int x = r.nextInt(50); //tiilien määrä
-            int y = r.nextInt(80);
-            Huone h = huoneet.get(monesko-1);
+            int x = r.nextInt(20)+5; //tiilien määrä
+            int y = r.nextInt(35)+5;
+            //Huone h = huoneet.get(monesko-1);
             
             if (monesko==0){    //jos kyseessä eka huone, sijoita randomilla, tätäkin pitänee kyllä parannella
                 sijainti[0] = x;
                 sijainti[1] = y;
             } else {
+                Huone h = huoneet.get(monesko-1);
                 List<Tiili> listaOvenPaikoista = huoneet.get(monesko-1).getSeinatiilet();
                 x = r.nextInt(listaOvenPaikoista.size()); //arpoo, minne ovi koitetaan törkätä
                 Tiili ovenpaikka = huoneet.get(monesko-1).getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
@@ -91,11 +92,13 @@ public class Taso {
             
                 if (ilmansuunta == 1){
                     sijainti[0]= h.getX()-pituus;
+                    //sijainti[1]= h.getY();
                     sijainti[1]= h.getY()-3;
                 } else if (ilmansuunta == 2){
                     sijainti[0]= huoneet.get(monesko-1).getX() + 1;
                     sijainti[1]= huoneet.get(monesko-1).getY() + 3; //kovakoodausta, tähän joku satunnaisuus joskus
                 } else if (ilmansuunta == 3){
+                    //sijainti[0]= h.getX();
                     sijainti[0]= h.getX() + 3;
                     sijainti[1]=h.getY()+h.getLeveys()-1;
                 } else {

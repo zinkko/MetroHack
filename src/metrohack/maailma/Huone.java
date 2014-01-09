@@ -26,6 +26,7 @@ public class Huone {
         this.y=y;
         this.pituus = pituus;
         this.leveys = leveys;
+        this.seinatiilet = new ArrayList<>();
         this.osat = luoTyhjaHuone(pituus,leveys);
         this.viereiset = new LinkedList<>();
     }
