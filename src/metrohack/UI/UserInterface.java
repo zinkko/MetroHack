@@ -77,15 +77,11 @@ public class UserInterface implements Runnable{
      */
     public void piirra(){
         this.piirtaja.piirra();
-        this.piirtaja.tulosta(testString());
+        //this.piirtaja.tulosta(testString());
     }
     
-    private String testString(){
-        String ret = "Stuffia riittää:";
-        for (int i=0;i<400;i++){
-            ret += (char) (i+30);
-        }
-        return ret;
+    public void tulosta(String s){
+        this.piirtaja.tulosta(s);
     }
 }
 

@@ -57,6 +57,9 @@ public class MetroHack{
         this.tasoNyt = ekaTaso;
     }
 
+    public void tulosta(String s){
+        this.ui.tulosta(s);
+    }
     
     private void vuoro(){
         

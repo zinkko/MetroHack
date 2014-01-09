@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import metrohack.MetroHack;
 
+
 /**
  *
  * @author ilari
@@ -19,13 +20,15 @@ public class Piirtaja {
     private MetroHack peli;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
-    private int tulostusRivi = 25; // 
+    //private final int tulostusRivi = 25; //
+    private String[] print;
     
     public Piirtaja(JTextArea teksti,int w, int h, MetroHack peli){
         this.piirtoAlusta = teksti;
         this.width = w;
         this.height = h;
         this.peli = peli;
+        this.print = new String[]{"hello","world","its","ilpo"};
     }
     
     public Piirtaja(JPanel paneeli){
@@ -65,18 +68,15 @@ public class Piirtaja {
     }
     
     public void tulosta(String teksti){
-        char[][] map = new char[width][height];
-        int rivi = this.tulostusRivi;
-        int j = 0;
-        for (int i=0;i<teksti.length();i++){
-            j=i%this.height;
-            if (i!= 0 && j==0){
-                rivi++;
-            }
-            map[rivi][j] = teksti.charAt(i);
+        if (teksti.length()>this.width){
+            teksti = teksti.substring(0, this.width);
+        }      
+        int tulostusRivi = height - this.print.length;
+        for (int i=1;i<this.print.length;i++){
+            this.print[i-1] = this.print[i]; 
         }
-        this.piirra(map);
-        
+        this.print[this.print.length-1] = teksti;
+        this.piirra();
     }
     
     private void piirraAsiat(char[][] map){
@@ -84,7 +84,17 @@ public class Piirtaja {
         this.paivitaHuoneet(map);
         this.paivitaHahmot(map);
         this.piirraAnkka(map);
+        this.piirraTulosteet(map);
         // piirrä päälle
+    }
+    
+    private void piirraTulosteet(char[][] map){
+        int alkuRivi = map.length - this.print.length;
+        for (int i=0;i<this.print.length;i++){
+            for (int j=0;j<this.print[i].length();j++){
+                map[alkuRivi+i][j] = print[i].charAt(j);
+            }
+        }
     }
     
     private void paivitaHuoneet(char[][] map){

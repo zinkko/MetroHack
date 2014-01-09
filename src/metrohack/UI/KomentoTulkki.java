@@ -75,6 +75,7 @@ public class KomentoTulkki {
                 dx=0;
                 dy=0;
         }
+        this.peli.tulosta("liikuit suuntaan"+ dx + "," + dy);
         pelaaja.liiku(dx, dy);
     }
 }
