@@ -44,7 +44,7 @@ public class Taso {
         int[] sijaintitaulukko;
         
         for (int i = 0; i<metrot.size(); i++){ //tämä looppi luo metrolaiturit
-            sijaintitaulukko = sijoitaHuone(i, 5, 10);
+            sijaintitaulukko = sijoitaHuone(i, 4, 4);
             huoneet.add(new Metrolaituri (metrot.get(i), 5, 10, sijaintitaulukko[0], sijaintitaulukko[1]));
         }
 
@@ -77,33 +77,36 @@ public class Taso {
         while (true){
             int x = r.nextInt(20)+5; //tiilien määrä
             int y = r.nextInt(35)+5;
+            int z = r.nextInt(8)-3;
             //Huone h = huoneet.get(monesko-1);
             
             if (monesko==0){    //jos kyseessä eka huone, sijoita randomilla, tätäkin pitänee kyllä parannella
                 sijainti[0] = x;
                 sijainti[1] = y;
             } else {
-                Huone h = huoneet.get(monesko-1);
-                List<Tiili> listaOvenPaikoista = huoneet.get(monesko-1).getSeinatiilet();
+                Huone h = huoneet.get(r.nextInt(huoneet.size()));
+                
+                
+                List<Tiili> listaOvenPaikoista = h.getSeinatiilet();
                 x = r.nextInt(listaOvenPaikoista.size()); //arpoo, minne ovi koitetaan törkätä
-                Tiili ovenpaikka = huoneet.get(monesko-1).getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
-                int ilmansuunta = huoneet.get(monesko-1).MillaSeinallaTiiliOn(ovenpaikka.getX(), ovenpaikka.getY());
+                Tiili ovenpaikka = h.getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
+                int ilmansuunta = h.MillaSeinallaTiiliOn(ovenpaikka.getX(), ovenpaikka.getY());
             
                 if (ilmansuunta == 1){
-                    sijainti[0]= h.getX()-pituus;
-                    //sijainti[1]= h.getY();
-                    sijainti[1]= h.getY()-3;
+                    sijainti[0] = h.getX()-pituus;
+                    sijainti[1] = h.getY()-z;
                 } else if (ilmansuunta == 2){
-                    sijainti[0]= huoneet.get(monesko-1).getX() + 1;
-                    sijainti[1]= huoneet.get(monesko-1).getY() + 3; //kovakoodausta, tähän joku satunnaisuus joskus
+                    sijainti[0] = h.getX() - 1;
+                    sijainti[1] = h.getY() + z;
                 } else if (ilmansuunta == 3){
-                    //sijainti[0]= h.getX();
-                    sijainti[0]= h.getX() + 3;
-                    sijainti[1]=h.getY()+h.getLeveys()-1;
+                    sijainti[0] = h.getX() + z;
+                    sijainti[1] = h.getY()+h.getLeveys()+1;
                 } else {
-                    sijainti[0]=h.getX()-3;
-                    sijainti[1]=h.getY()+h.getLeveys()+1;
-               }
+                    sijainti[0] = h.getX() + z;
+                    sijainti[1] = h.getY()+h.getLeveys()-1;
+                }
+                ovenpaikka.setTyyppi(Tiilityyppi.OVI); //ei toimi koska kuunatsit?
+                
             }
 
             boolean feilaakoHuoneenSijoitus = false;
@@ -122,6 +125,7 @@ public class Taso {
             }
 
             if (!feilaakoHuoneenSijoitus){
+                
                 break;
             }
         }

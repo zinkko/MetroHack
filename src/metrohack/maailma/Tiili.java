@@ -13,7 +13,8 @@ package metrohack.maailma;
 public class Tiili {
     private final int x,y;
     private char kuva; 
-    private final Tiilityyppi tyyppi;
+    private Tiilityyppi tyyppi;
+    //private final Tiilityyppi tyyppi; korvattu finaalimuuttuja tavallisella by Aino
     
     public Tiili(int x, int y, Tiilityyppi t){
         this.x = x;
@@ -33,6 +34,12 @@ public class Tiili {
     public void setKuva(char c){
         this.kuva = c;
     }
+    
+    public void setTyyppi(Tiilityyppi t){
+        this.tyyppi=t;
+    }
+    
+
     
     public int[] getSijainti(){
         int[] sijainti = new int[2];

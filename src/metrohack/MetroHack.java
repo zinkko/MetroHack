@@ -53,7 +53,10 @@ public class MetroHack{
 
     private void luoEkaTaso(){ // korvaa jollain myöhemmin
         List<Linja> metrot = new LinkedList<Linja>();
-        metrot.add(new Linja());
+        Linja eka = new Linja();
+        Linja toka = new Linja();
+        metrot.add(eka);
+        metrot.add(toka);
         Taso ekaTaso = new Taso(5,false,metrot);
         this.tasoNyt = ekaTaso;
     }

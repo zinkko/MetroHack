@@ -20,9 +20,5 @@ public class Metrolaituri extends Huone {
 		+ "asianomaista lippua matkustavilta voidaan periÃ¤ tarkastusmaksu 20 euroa.";
 	}
     
-    public void piirra(char[][] map){
-        for (Tiili t : osat){
-            t.piirra(map);
-        }
-    }
+
 }
