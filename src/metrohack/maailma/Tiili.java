@@ -12,7 +12,7 @@ package metrohack.maailma;
  */
 public class Tiili {
     private final int x,y;
-    private char kuva; 
+    //private char kuva; 
     private Tiilityyppi tyyppi;
     //private final Tiilityyppi tyyppi; korvattu finaalimuuttuja tavallisella by Aino
     
@@ -20,20 +20,18 @@ public class Tiili {
         this.x = x;
         this.y = y;
         this.tyyppi = t;
-        this.kuva = t.getKuva();
+        //this.kuva = t.getKuva();
     }
     
     public void piirra(char[][] map){
         try{
-            map[this.x][this.y] = this.kuva;
+            map[this.x][this.y] = this.tyyppi.getKuva();
         }catch(ArrayIndexOutOfBoundsException ex){
             //
         }
     }
     
-    public void setKuva(char c){
-        this.kuva = c;
-    }
+
     
     public void setTyyppi(Tiilityyppi t){
         this.tyyppi=t;
