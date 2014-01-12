@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package metrohack.maailma;
 
 import metrohack.maailma.entities.Hahmo;
@@ -14,109 +13,123 @@ import java.util.*;
  * @author ilari
  */
 public class Taso {
+
     private String name;
     private List<Huone> huoneet;
     private List<Hahmo> hahmot;
     private List<Linja> metrot;
     private List<Tiili> tiilet;
-    
-    public Taso(int huoneidenMaara, boolean onkoKauppaa, List<Linja> metrot){
+
+    public Taso(int huoneidenMaara, boolean onkoKauppaa, List<Linja> metrot) {
         this.name = "Ankkalan metro";
         //this.metrot = new LinkedList<>();
         this.metrot = metrot;
         this.huoneet = new ArrayList<>();
         this.hahmot = new ArrayList<>();
         this.tiilet = new ArrayList<>();
-        
-        for (int i = 0; i<35; i++){
-            for (int j = 0; j<25; j++){
-                tiilet.add(new Tiili(i,j, Tiilityyppi.NOLLA));              
+
+        for (int i = 0; i < 35; i++) {
+            for (int j = 0; j < 25; j++) {
+                tiilet.add(new Tiili(i, j, Tiilityyppi.NOLLA));
             }
         }
+        //luoHuoneita();
         luoTaso(huoneidenMaara, onkoKauppaa);
     }
-    
-    private void luoTaso(int huoneidenMaara, boolean onkoKauppaa){ //huom, huoneiden määrän lisäksi tulee metrolaiturit
+
+    private void luoHuoneita() {
+        Huone h = new Huone(this.tiilet, 8, 4, 20, 10);
+        this.huoneet.add(h);
+        //this.huoneet.add(new Huone(this.tiilet,10,5,5,17));
+    }
+
+    private void luoTaso(int huoneidenMaara, boolean onkoKauppaa) { //huom, huoneiden määrän lisäksi tulee metrolaiturit
         Random r = new Random();
         double millainenHuone;
         int huoneenPituus;
         int huoneenLeveys = 1;
         int[] sijaintitaulukko;
-        
-        for (int i = 0; i<metrot.size(); i++){ //tämä looppi luo metrolaiturit
+
+        for (int i = 0; i < metrot.size(); i++) { //tämä looppi luo metrolaiturit
             sijaintitaulukko = sijoitaHuone(i, 4, 4);
-            huoneet.add(new Metrolaituri (metrot.get(i), 5, 10, sijaintitaulukko[0], sijaintitaulukko[1]));
+            huoneet.add(new Metrolaituri(this.tiilet, metrot.get(i), 10, 5, sijaintitaulukko[0], sijaintitaulukko[1]));
         }
 
-        for (int i = 0; i<huoneidenMaara; i++){ //tämä looppi luo normihuoneet
+        for (int i = 0; i < huoneidenMaara; i++) { //tämä looppi luo normihuoneet
             millainenHuone = r.nextDouble();
-            huoneenPituus = r.nextInt(15)+3;
-            
-            if (millainenHuone < 0.25){          //tällöin luo pystykäytävä
+            huoneenPituus = r.nextInt(15) + 3;
+
+            if (millainenHuone < 0.25) {          //tällöin luo pystykäytävä
                 huoneenLeveys = huoneenPituus;
                 huoneenPituus = 3;
-            } else if (millainenHuone < 0.50){  // tällöin luo vaakasuuntainen käytävä
+            } else if (millainenHuone < 0.50) {  // tällöin luo vaakasuuntainen käytävä
                 huoneenLeveys = 3;
             } else {
-                huoneenLeveys = r.nextInt(15)+3; // muutoin luo tavallisen muotoinen huone
-                if (onkoKauppaa){
-                    huoneet.add(new Kauppa (huoneenPituus, huoneenLeveys,0,0));
+                huoneenLeveys = r.nextInt(15) + 3; // muutoin luo tavallisen muotoinen huone
+                if (onkoKauppaa) {
+                    int[] ankka = this.sijoitaHuone(i, huoneenPituus, huoneenLeveys);
+                    huoneet.add(new Kauppa(this.tiilet, huoneenPituus, huoneenLeveys, ankka[0],ankka[1]));
                     onkoKauppaa = false;
                     continue;
                 }
             }
-            sijaintitaulukko = sijoitaHuone((i+metrot.size()), huoneenPituus, huoneenLeveys);
-            huoneet.add(new Huone(huoneenPituus, huoneenLeveys, sijaintitaulukko[0], sijaintitaulukko[1]));
+            sijaintitaulukko = sijoitaHuone((i + metrot.size()),
+                    huoneenPituus, huoneenLeveys);
+            huoneet.add(new Huone(this.tiilet, huoneenPituus, huoneenLeveys,
+                    sijaintitaulukko[0], sijaintitaulukko[1]));
         }
 
     }
-    
-    public int[] sijoitaHuone(int monesko, int pituus, int leveys){
+
+    public int[] sijoitaHuone(int monesko, int pituus, int leveys) {
         int[] sijainti = new int[2];
         Random r = new Random();
-        while (true){
-            int x = r.nextInt(20)+5; //tiilien määrä
-            int y = r.nextInt(35)+5;
-            int z = r.nextInt(8)-3;
+        while (true) {
+            int x = r.nextInt(100 - leveys - 5) + 5; //tiilien määrä
+            int y = r.nextInt(30 - pituus - 5) + 5;
+            int z = r.nextInt(8) - 3;
             //Huone h = huoneet.get(monesko-1);
-            
-            if (monesko==0){    //jos kyseessä eka huone, sijoita randomilla, tätäkin pitänee kyllä parannella
-                sijainti[0] = x;
-                sijainti[1] = y;
+
+            if (monesko == 0) {    //jos kyseessä eka huone, sijoita randomilla, tätäkin pitänee kyllä parannella
+                sijainti[0] = 20;
+                sijainti[1] = 10;
             } else {
                 Huone h = huoneet.get(r.nextInt(huoneet.size()));
-                
-                
+
                 List<Tiili> listaOvenPaikoista = h.getSeinatiilet();
+                if (h.getSeinatiilet().isEmpty()) {
+                    System.out.println(h);
+                    break;
+                }
                 x = r.nextInt(listaOvenPaikoista.size()); //arpoo, minne ovi koitetaan törkätä
                 Tiili ovenpaikka = h.getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
                 int ilmansuunta = h.MillaSeinallaTiiliOn(ovenpaikka.getX(), ovenpaikka.getY());
-            
-                if (ilmansuunta == 1){
-                    sijainti[0] = h.getX()-pituus;
-                    sijainti[1] = h.getY()-z;
-                } else if (ilmansuunta == 2){
+
+                if (ilmansuunta == 1) {
+                    sijainti[0] = h.getX() - pituus;
+                    sijainti[1] = h.getY() - z;
+                } else if (ilmansuunta == 2) {
                     sijainti[0] = h.getX() - 1;
                     sijainti[1] = h.getY() + z;
-                } else if (ilmansuunta == 3){
+                } else if (ilmansuunta == 3) {
                     sijainti[0] = h.getX() + z;
-                    sijainti[1] = h.getY()+h.getLeveys()+1;
+                    sijainti[1] = h.getY() + h.getLeveys() + 1;
                 } else {
                     sijainti[0] = h.getX() + z;
-                    sijainti[1] = h.getY()+h.getLeveys()-1;
+                    sijainti[1] = h.getY() + h.getLeveys() - 1;
                 }
-                ovenpaikka.setTyyppi(Tiilityyppi.OVI); //ei toimi koska kuunatsit?
+                ovenpaikka.setTyyppi(Tiilityyppi.OVI);
                 
             }
-
+            
             boolean feilaakoHuoneenSijoitus = false;
-            for (Huone huone: huoneet){
-                for (int i=x; i<x+pituus;i++){
-                    for (int j=y; j<y+pituus;j++){
+            for (Huone huone : huoneet) {
+                for (int i = x; i < x + pituus; i++) {
+                    for (int j = y; j < y + pituus; j++) {
                         int[] taulukko = new int[2];
-                        taulukko[0]=i;
-                        taulukko[1]=j;
-                        if (huone.onkoPaallekkain(taulukko)){
+                        taulukko[0] = i;
+                        taulukko[1] = j;
+                        if (huone.onkoPaallekkain(taulukko)) {
                             feilaakoHuoneenSijoitus = true;
                             break;
                         }
@@ -124,28 +137,26 @@ public class Taso {
                 }
             }
 
-            if (!feilaakoHuoneenSijoitus){
-                
+            if (!feilaakoHuoneenSijoitus) {
+
                 break;
             }
         }
-            return sijainti;
-        }
-    
-    public List<Linja> getMetroLinjat(){
+
+        return sijainti;
+    }
+
+    public List<Linja> getMetroLinjat() {
         return this.metrot;
     }
-    
-    
-    
-    public void piirra(char[][] map){
-        for (Huone h:huoneet){
+
+    public void piirra(char[][] map) {
+        for (Huone h : huoneet) {
             h.piirra(map);
         }
-        for (Hahmo h:hahmot){
+        for (Hahmo h : hahmot) {
             h.piirra(map); // hahmot piirretään päälle
         }
     }
-    
-   
+
 }

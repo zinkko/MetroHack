@@ -16,6 +16,7 @@ import metrohack.maailma.entities.Pelaaja;
 public class KomentoTulkki {
     
     private static final String MOVE_CHARS = "ikjluom.";
+    private static final char CMD_CHAR = '$';
     private boolean cmdMode = false;
     private String komento = "";
     private final MetroHack peli;
@@ -37,9 +38,9 @@ public class KomentoTulkki {
         
         if(KomentoTulkki.MOVE_CHARS.contains(command)){
             moveCommand(command);
-        }else if (cmd=='$'){
+        }else if (cmd==CMD_CHAR){
             this.cmdMode = true;
-            this.komento('$');
+            this.komento(CMD_CHAR);
         }
         // lisää vaihtoehtoja
         
@@ -53,10 +54,13 @@ public class KomentoTulkki {
             this.cmdMode = false;
         }else if (cmd == '\b'){ // del char
             this.piirtaja.backspace();
+        }else if ((int)cmd == 65535){ // this will come up with SHIFT,CTRL, etc
+            //skip
         }else{
             this.piirtaja.addCharToCmd(cmd);
         }
-        System.out.println(cmd);
+        System.out.print(cmd);
+        System.out.println(" "+(int) cmd);
     }
     
     private void applyCommand(String cmd){
@@ -64,6 +68,7 @@ public class KomentoTulkki {
         switch (cmd){
             case "ankka":
                 this.piirtaja.piirraYstavaAnkka();
+                break;
             default:
                 this.piirtaja.tulosta("outo komento :O");
         }
@@ -111,7 +116,7 @@ public class KomentoTulkki {
                 dx=0;
                 dy=0;
         }
-        this.peli.tulosta("liikuit suuntaan "+ dx + "," + dy);
+        //this.peli.tulosta("liikuit suuntaan "+ dx + "," + dy);
         pelaaja.liiku(dx, dy);
     }
 }

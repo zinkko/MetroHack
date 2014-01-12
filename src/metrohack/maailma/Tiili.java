@@ -25,13 +25,16 @@ public class Tiili {
     
     public void piirra(char[][] map){
         try{
-            map[this.x][this.y] = this.tyyppi.getKuva();
+            map[this.y][this.x] = this.tyyppi.getKuva();
         }catch(ArrayIndexOutOfBoundsException ex){
             //
         }
     }
     
 
+    public Tiilityyppi getTyyppi(){
+        return this.tyyppi;
+    }
     
     public void setTyyppi(Tiilityyppi t){
         this.tyyppi=t;

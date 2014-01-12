@@ -4,6 +4,8 @@
  */
 package metrohack.maailma;
 
+import java.util.List;
+
 /**
  *
  * @author Kulmala
@@ -13,8 +15,8 @@ public class Kauppa extends Huone {
 
 	private String kuvaus;
 	
-	public Kauppa(int pituus, int leveys,int x,int y){
-		super(pituus, leveys,x,y);
+	public Kauppa(List<Tiili> ankka,int pituus, int leveys,int x,int y){
+		super(ankka,pituus, leveys,x,y);
 		this.kuvaus = "Le Kauppa"; //insert järkevää here
 	}
     
