@@ -69,6 +69,12 @@ public class KomentoTulkki {
             case "ankka":
                 this.piirtaja.piirraYstavaAnkka();
                 break;
+            case "test":
+                this.peli.setWalkThruWalls(true);
+                break;
+            case "test off":
+                this.peli.setWalkThruWalls(false);
+                break;
             default:
                 this.piirtaja.tulosta("outo komento :O");
         }

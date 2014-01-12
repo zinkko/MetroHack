@@ -13,6 +13,8 @@ import metrohack.UI.Piirtaja;
 import metrohack.UI.UserInterface;
 import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
+import metrohack.maailma.Tiili;
+import metrohack.maailma.Tiilityyppi;
 
 
 /**
@@ -31,6 +33,11 @@ public class MetroHack{
         //this.ui = new UserInterface(this,textBased);
         this.pelaaja = new Pelaaja(10, "Pentti", 12,12);
         this.luoEkaTaso();
+        this.pelaaja.vaihdaTasoa(tasoNyt);
+    }
+    
+    public void setWalkThruWalls(boolean b){
+        this.pelaaja.setTestMode(b);
     }
     
     /**
@@ -69,6 +76,11 @@ public class MetroHack{
         
         this.ui.piirra();
     }
+    
+    public Tiilityyppi getTiili(int x, int y){
+        return this.tasoNyt.getTiili(x, y);
+    }
+
     
     public Pelaaja getPelaaja(){
         return this.pelaaja;

@@ -42,6 +42,17 @@ public class Taso {
         this.huoneet.add(h);
         //this.huoneet.add(new Huone(this.tiilet,10,5,5,17));
     }
+    
+    public Tiilityyppi getTiili(int y, int x){ // this flip just works
+        // TODO: mieti koordinaatteja, ja laita kaikki toimimaan hyvin ilman purkkaa
+        for (Tiili t:this.tiilet){
+            if (t.getX()==x && t.getY()==y){
+                return t.getTyyppi();
+            }
+        }
+        return null;
+    }
+
 
     private void luoTaso(int huoneidenMaara, boolean onkoKauppaa) { //huom, huoneiden määrän lisäksi tulee metrolaiturit
         Random r = new Random();

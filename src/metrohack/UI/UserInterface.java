@@ -50,6 +50,7 @@ public class UserInterface implements Runnable{
         }
         frame.setVisible(true);
         frame.pack();
+        this.piirra();
     }
     
     private void luoGraafisetKomponentit(Container c){
