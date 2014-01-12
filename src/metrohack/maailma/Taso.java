@@ -28,8 +28,8 @@ public class Taso {
         this.hahmot = new ArrayList<>();
         this.tiilet = new ArrayList<>();
 
-        for (int i = 0; i < 35; i++) {
-            for (int j = 0; j < 25; j++) {
+        for (int i = 0; i < 70; i++) {
+            for (int j = 0; j < 30; j++) {
                 tiilet.add(new Tiili(i, j, Tiilityyppi.NOLLA));
             }
         }
@@ -51,13 +51,13 @@ public class Taso {
         int[] sijaintitaulukko;
 
         for (int i = 0; i < metrot.size(); i++) { //tämä looppi luo metrolaiturit
-            sijaintitaulukko = sijoitaHuone(i, 4, 4);
-            huoneet.add(new Metrolaituri(this.tiilet, metrot.get(i), 10, 5, sijaintitaulukko[0], sijaintitaulukko[1]));
+            sijaintitaulukko = sijoitaHuone(i, 6, 4);
+            huoneet.add(new Metrolaituri(this.tiilet, metrot.get(i), 6, 4, sijaintitaulukko[0], sijaintitaulukko[1]));
         }
 
         for (int i = 0; i < huoneidenMaara; i++) { //tämä looppi luo normihuoneet
             millainenHuone = r.nextDouble();
-            huoneenPituus = r.nextInt(15) + 3;
+            huoneenPituus = r.nextInt(10) + 3;
 
             if (millainenHuone < 0.25) {          //tällöin luo pystykäytävä
                 huoneenLeveys = huoneenPituus;
@@ -65,10 +65,10 @@ public class Taso {
             } else if (millainenHuone < 0.50) {  // tällöin luo vaakasuuntainen käytävä
                 huoneenLeveys = 3;
             } else {
-                huoneenLeveys = r.nextInt(15) + 3; // muutoin luo tavallisen muotoinen huone
+                huoneenLeveys = r.nextInt(10) + 3; // muutoin luo tavallisen muotoinen huone
                 if (onkoKauppaa) {
-                    int[] ankka = this.sijoitaHuone(i, huoneenPituus, huoneenLeveys);
-                    huoneet.add(new Kauppa(this.tiilet, huoneenPituus, huoneenLeveys, ankka[0],ankka[1]));
+                    int[] tanneKauppa = this.sijoitaHuone(i, huoneenPituus, huoneenLeveys);
+                    huoneet.add(new Kauppa(this.tiilet, huoneenPituus, huoneenLeveys, tanneKauppa[0],tanneKauppa[1]));
                     onkoKauppaa = false;
                     continue;
                 }
@@ -87,12 +87,13 @@ public class Taso {
         while (true) {
             int x = r.nextInt(100 - leveys - 5) + 5; //tiilien määrä
             int y = r.nextInt(30 - pituus - 5) + 5;
-            int z = r.nextInt(8) - 3;
+            int z = r.nextInt(8) - 3; //mihin kohtaan huoneen seinää ovi laitetaan
+            Tiili ovenpaikka = null;
             //Huone h = huoneet.get(monesko-1);
 
-            if (monesko == 0) {    //jos kyseessä eka huone, sijoita randomilla, tätäkin pitänee kyllä parannella
-                sijainti[0] = 20;
-                sijainti[1] = 10;
+            if (monesko == 0) {    //jos kyseessä eka huone, sijoita aina vakiopaikkaan näin aluksi
+                sijainti[0] = 40;
+                sijainti[1] = 12;
             } else {
                 Huone h = huoneet.get(r.nextInt(huoneet.size()));
 
@@ -102,7 +103,7 @@ public class Taso {
                     break;
                 }
                 x = r.nextInt(listaOvenPaikoista.size()); //arpoo, minne ovi koitetaan törkätä
-                Tiili ovenpaikka = h.getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
+                ovenpaikka = h.getSeinatiilet().get(x); //nyt pitäis koittaa kaivaa tiili, johon ovea laitetaan
                 int ilmansuunta = h.MillaSeinallaTiiliOn(ovenpaikka.getX(), ovenpaikka.getY());
 
                 if (ilmansuunta == 1) {
@@ -118,7 +119,7 @@ public class Taso {
                     sijainti[0] = h.getX() + z;
                     sijainti[1] = h.getY() + h.getLeveys() - 1;
                 }
-                ovenpaikka.setTyyppi(Tiilityyppi.OVI);
+                //ovenpaikka.setTyyppi(Tiilityyppi.OVI); ei voi olla tässä, muuten tulee liikaa ovia!
                 
             }
             
@@ -138,7 +139,9 @@ public class Taso {
             }
 
             if (!feilaakoHuoneenSijoitus) {
-
+                if (!(ovenpaikka==null)){
+                    ovenpaikka.setTyyppi(Tiilityyppi.OVI);
+                }
                 break;
             }
         }

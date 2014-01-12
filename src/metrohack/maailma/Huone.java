@@ -26,7 +26,7 @@ public class Huone {
         this.leveys = leveys;
         this.pituus = pituus;
         this.seinatiilet = new ArrayList<>();
-        this.osat = ankka(kaikki);
+        this.osat = valitseTiiletHuoneeseen(kaikki);
         this.viereiset = new LinkedList<>();
 
         this.setSeinatiilet();
@@ -37,8 +37,8 @@ public class Huone {
         return "("+this.x+","+this.y+") "+this.leveys+"x"+this.pituus;
     }
     
-    private List<Tiili> ankka(List<Tiili> kaikki) {
-        List<Tiili> ret = new ArrayList<>();
+    private List<Tiili> valitseTiiletHuoneeseen(List<Tiili> kaikki) {
+        List<Tiili> huoneenTiilet = new ArrayList<>();
 
         for (Tiili t : kaikki) {
             if (t.getX() >= this.x && t.getX() < this.x + this.leveys
@@ -47,11 +47,11 @@ public class Huone {
                 if (t.getX()==x || t.getY()==y|| t.getX() == x+leveys-1 || t.getY()==y+pituus-1){
                     t.setTyyppi(Tiilityyppi.SEINA);
                 }
-                ret.add(t);
+                huoneenTiilet.add(t);
             }
         }
 
-        return ret;
+        return huoneenTiilet;
     }
 
     /*
