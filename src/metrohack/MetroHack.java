@@ -64,7 +64,7 @@ public class MetroHack{
         Linja toka = new Linja();
         metrot.add(eka);
         metrot.add(toka);
-        Taso ekaTaso = new Taso(2,false,metrot);
+        Taso ekaTaso = new Taso(3,false,metrot);
         this.tasoNyt = ekaTaso;
     }
 

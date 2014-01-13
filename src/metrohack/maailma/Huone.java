@@ -136,6 +136,17 @@ public class Huone {
         }
         return false;
     }
+    
+    public boolean doesItCollide(Huone annettu){
+        for (Tiili huoneenTiili: this.osat){
+            for (Tiili annetunHuoneenTiili: annettu.getOsat()){
+                if (huoneenTiili.getSijainti()==annetunHuoneenTiili.getSijainti()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public List<Tiili> getOsat() {
         return this.osat;

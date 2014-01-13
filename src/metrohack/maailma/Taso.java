@@ -19,6 +19,7 @@ public class Taso {
     private List<Hahmo> hahmot;
     private List<Linja> metrot;
     private List<Tiili> tiilet;
+    private List<Tiili> varatutTiilet;
 
     public Taso(int huoneidenMaara, boolean onkoKauppaa, List<Linja> metrot) {
         this.name = "Ankkalan metro";
@@ -27,6 +28,7 @@ public class Taso {
         this.huoneet = new ArrayList<>();
         this.hahmot = new ArrayList<>();
         this.tiilet = new ArrayList<>();
+        this.varatutTiilet = new ArrayList<>();
 
         for (int i = 0; i < 70; i++) {
             for (int j = 0; j < 30; j++) {
@@ -88,6 +90,8 @@ public class Taso {
                     huoneenPituus, huoneenLeveys);
             huoneet.add(new Huone(this.tiilet, huoneenPituus, huoneenLeveys,
                     sijaintitaulukko[0], sijaintitaulukko[1]));
+            
+            varatutTiilet.addAll(huoneet.get(i).getOsat()); //lisätään huoneen tiilet tason listaan jo varatuista paikoista
         }
 
     }
@@ -133,33 +137,54 @@ public class Taso {
                 //ovenpaikka.setTyyppi(Tiilityyppi.OVI); ei voi olla tässä, muuten tulee liikaa ovia!
                 
             }
-            
-            boolean feilaakoHuoneenSijoitus = false;
-            for (Huone huone : huoneet) {
-                for (int i = x; i < x + pituus; i++) {
-                    for (int j = y; j < y + pituus; j++) {
-                        int[] taulukko = new int[2];
-                        taulukko[0] = i;
-                        taulukko[1] = j;
-                        if (huone.onkoPaallekkain(taulukko)) {
-                            feilaakoHuoneenSijoitus = true;
-                            break;
-                        }
-                    }
-                }
-            }
 
-            if (!feilaakoHuoneenSijoitus) {
+            if (!feilaako(sijainti, pituus, leveys)) {
                 if (!(ovenpaikka==null)){
                     ovenpaikka.setTyyppi(Tiilityyppi.OVI);
                 }
-                break;
+                return sijainti;
             }
         }
 
         return sijainti;
     }
+    
+    public boolean feilaakoHuoneenSijoittaminen(int[] sijainti, int pituus, int leveys){
+        for (Huone huone : huoneet) {
+                for (int i = sijainti[0]; i < sijainti[0] + pituus -1; i++) {
+                    for (int j = sijainti[1]; j < sijainti[1] + leveys -1; j++) {
+                        int[] taulukko = new int[2];
+                        taulukko[0] = i;
+                        taulukko[1] = j;
+                        if (huone.onkoPaallekkain(taulukko)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        return false;
+    }
 
+    public boolean feilaako(int[] sijainti, int pituus, int leveys){
+        for (int i=0; i<pituus; i++){
+            for (int j=0; j<leveys; j++){
+                if (onkoSijaintiVarattujenTiilienListalla(i, j)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean onkoSijaintiVarattujenTiilienListalla(int i, int j){
+        for (Tiili t: varatutTiilet){
+            if (t.getX()==i && t.getY()==j){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public List<Linja> getMetroLinjat() {
         return this.metrot;
     }
