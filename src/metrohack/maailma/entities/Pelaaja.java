@@ -4,6 +4,7 @@
  */
 package metrohack.maailma.entities;
 
+import metrohack.MetroHack;
 import metrohack.maailma.Taso;
 import metrohack.maailma.Tiilityyppi;
 
@@ -14,14 +15,17 @@ import metrohack.maailma.Tiilityyppi;
 public class Pelaaja extends Hahmo{
 	private int ruoka;
 	private Reppu reppu;
-        private boolean testing = false;
+        private boolean testaustila = false;
         private Taso tasoNyt;
+        private MetroHack peli;
 	
-	public Pelaaja(int vitutus, String nimi, int x, int y){
+	public Pelaaja(MetroHack peli, int vitutus, String nimi, int x, int y){
 		super(vitutus, nimi, x, y);
 		this.ruoka = 10;
 		this.reppu = new Reppu(10, 10);
                 this.merkki = '@';
+                this.peli = peli;
+                
 	}
         
         public void vaihdaTasoa(Taso t){
@@ -29,12 +33,16 @@ public class Pelaaja extends Hahmo{
         }
         
         public void setTestMode(boolean b){
-            this.testing = b;
+            this.testaustila = b;
+        }
+        
+        public Reppu getReppu(){
+            return this.reppu;
         }
         
         public void liiku(int dx, int dy){
             Tiilityyppi t = this.tasoNyt.getTiili(x+dx, y+dy);
-            if (t== Tiilityyppi.SEINA && !testing){
+            if (t== Tiilityyppi.SEINA && !testaustila){
                 //System.out.println("Wall!");
                 return; // don't walk trhu walls
             }

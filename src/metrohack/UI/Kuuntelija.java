@@ -16,9 +16,9 @@ import java.awt.event.KeyListener;
 public class Kuuntelija implements KeyListener{
     
     //private Modifier mod;
-    private final KomentoTulkki tulkki;
+    private final Komentotulkki tulkki;
     
-    public Kuuntelija(KomentoTulkki t){
+    public Kuuntelija(Komentotulkki t){
         this.tulkki = t;
     }
     

@@ -56,14 +56,14 @@ public class UserInterface implements Runnable{
     private void luoGraafisetKomponentit(Container c){
         System.out.println("Hello World!");
         JPanel panel = new JPanel();
-        panel.addKeyListener(new Kuuntelija(new KomentoTulkki(peli)));
+        panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli)));
         c.add(panel);
     }
     
     private void luoTekstiKomponentit(Container c){
         System.out.println("Hello World!");
         JTextArea tekstikentta = new JTextArea();
-        KomentoTulkki t = new KomentoTulkki(peli);
+        Komentotulkki t = new Komentotulkki(peli);
         Kuuntelija k = new Kuuntelija(t);
         tekstikentta.setFont(new Font(this.fontName,Font.PLAIN,17));
         tekstikentta.setText("Hello World");

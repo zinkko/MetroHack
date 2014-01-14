@@ -16,9 +16,10 @@ public class Tavara{
 	protected String kuvaus;
 	protected TavaranTyyppi tyyppi;
 	protected int lukuarvo; //esim. ruuilla: montako plussaa saa tämän syömällä
+        protected int hinta;
 	protected Random random;
 	
-	public Tavara(String nimi){
+	public Tavara(String nimi, int hinta){
 		this.nimi = nimi;
 		this.lukuarvo = 0;
 		this.random = new Random();
@@ -26,9 +27,11 @@ public class Tavara{
 		if (nimi.equals("kertalippu")){
 			this.kuvaus = "Kertalipulla voit matkustaa yhdellÃ¤ metrolinjalla kerran.";
 			this.tyyppi = LIPPU;
+                        this.lukuarvo = 0;
 		} else if(nimi.equals("kausilippu")){
 			this.kuvaus = "Kausilipulla voit matkustaa ilmaiseksi niin kauan kuin se on voimassa (eli hyvin kauan)";
 			this.tyyppi = LIPPU;
+                        this.lukuarvo = 0;
 		} else if(nimi.equals("patonki")){
 			this.kuvaus = "Herkullista ruokaa, muttei kovin tÃ¤yttÃ¤vÃ¤Ã¤.";
 			this.tyyppi = RUOKA;
@@ -56,14 +59,24 @@ public class Tavara{
 		} else {
 			this.kuvaus = "ei kuvausta";
 			this.tyyppi = MUU;
+                        this.lukuarvo = 0;
 		}
+                this.hinta = hinta;
 	}
 	
 	public String getNimi(){
 		return this.nimi;
 	}
+        
+        public int getHinta(){
+            return this.hinta;
+        }
 	
 	public String getKuvaus(){
 		return this.nimi + "\n" + this.kuvaus;
 	}
+        
+        public TavaranTyyppi getTyyppi(){
+            return this.tyyppi;
+        }
 }
