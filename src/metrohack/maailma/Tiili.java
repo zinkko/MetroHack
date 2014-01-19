@@ -37,7 +37,11 @@ public class Tiili {
     }
     
     public void setTyyppi(Tiilityyppi t){
+        if (this.tyyppi == Tiilityyppi.OVI || this.tyyppi == Tiilityyppi.LAITURI){
+            return;
+        }
         this.tyyppi=t;
+        
     }
     
 

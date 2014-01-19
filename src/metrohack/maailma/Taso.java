@@ -30,13 +30,55 @@ public class Taso {
         this.tiilet = new ArrayList<>();
         this.varatutTiilet = new ArrayList<>();
 
-        for (int i = 0; i < 70; i++) {
+        for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 30; j++) {
                 tiilet.add(new Tiili(i, j, Tiilityyppi.NOLLA));
             }
         }
+        
         //luoHuoneita();
         luoTaso(huoneidenMaara, onkoKauppaa);
+    }
+    
+    public Taso(List<Linja> metrot){
+        this.name = "Ankkalan Metro";
+        this.metrot = metrot;
+        this.hahmot = new ArrayList<>();
+        this.huoneet = new ArrayList<>();
+        this.tiilet = new ArrayList<>();
+        
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 30; j++) {
+                tiilet.add(new Tiili(i, j, Tiilityyppi.NOLLA));
+            }
+        }
+    }
+    
+    public List<Tiili> getTiilet(){
+        return this.tiilet;
+    }
+    
+    public void lisaaHuone(Huone h){
+        this.huoneet.add(h);
+    }
+    
+    public boolean collide(int x, int y, int pituus, int leveys){
+        
+        for (Huone huone : this.huoneet){
+            boolean x1 = huone.getX()<x && x<huone.getX()+huone.getPituus();
+            boolean x2 = x<huone.getX() && huone.getX() < x + pituus;
+            if (!(x1 || x2)){
+                continue;
+            }
+            boolean y1 = huone.getY() < y && y < huone.getY() + huone.getLeveys();
+            boolean y2 = y < huone.getY() && huone.getY() < y + leveys;
+            
+            if (y1 || y2){
+                return true;
+            }
+            
+        }
+        return false;
     }
 
     private void luoHuoneita() {
@@ -49,12 +91,11 @@ public class Taso {
         // TODO: mieti koordinaatteja, ja laita kaikki toimimaan hyvin ilman purkkaa
         for (Tiili t:this.tiilet){
             if (t.getX()==x && t.getY()==y){
-                return t.getTyyppi();
+                return t.getTyyppi();             
             }
         }
         return null;
     }
-
 
     private void luoTaso(int huoneidenMaara, boolean onkoKauppaa) { //huom, huoneiden määrän lisäksi tulee metrolaiturit
         Random r = new Random();
@@ -88,10 +129,12 @@ public class Taso {
             }
             sijaintitaulukko = sijoitaHuone((i + metrot.size()),
                     huoneenPituus, huoneenLeveys);
-            huoneet.add(new Huone(this.tiilet, huoneenPituus, huoneenLeveys,
-                    sijaintitaulukko[0], sijaintitaulukko[1]));
+            Huone huone = new Huone(this.tiilet, huoneenPituus, huoneenLeveys,
+                    sijaintitaulukko[0], sijaintitaulukko[1]);
             
-            varatutTiilet.addAll(huoneet.get(i).getOsat()); //lisätään huoneen tiilet tason listaan jo varatuista paikoista
+            huoneet.add(huone);
+            
+            varatutTiilet.addAll(huone.getOsat()); //lisätään huoneen tiilet tason listaan jo varatuista paikoista
         }
 
     }
@@ -99,7 +142,13 @@ public class Taso {
     public int[] sijoitaHuone(int monesko, int pituus, int leveys) {
         int[] sijainti = new int[2];
         Random r = new Random();
+        int loopLimit = 0;
         while (true) {
+            loopLimit++;
+            if (loopLimit>1000){
+                System.out.println("ARGARG");
+                break;
+            }
             int x = r.nextInt(100 - leveys - 5) + 5; //tiilien määrä
             int y = r.nextInt(30 - pituus - 5) + 5;
             int z = r.nextInt(8) - 3; //mihin kohtaan huoneen seinää ovi laitetaan
@@ -148,7 +197,7 @@ public class Taso {
 
         return sijainti;
     }
-    
+    /*
     public boolean feilaakoHuoneenSijoittaminen(int[] sijainti, int pituus, int leveys){
         for (Huone huone : huoneet) {
                 for (int i = sijainti[0]; i < sijainti[0] + pituus -1; i++) {
@@ -163,11 +212,11 @@ public class Taso {
                 }
             }
         return false;
-    }
+    }*/
 
     public boolean feilaako(int[] sijainti, int pituus, int leveys){
-        for (int i=0; i<pituus; i++){
-            for (int j=0; j<leveys; j++){
+        for (int i=sijainti[0]; i<pituus+sijainti[0]; i++){
+            for (int j=sijainti[1]; j<leveys+sijainti[1]; j++){
                 if (onkoSijaintiVarattujenTiilienListalla(i, j)){
                     return true;
                 }
@@ -177,9 +226,11 @@ public class Taso {
     }
     
     public boolean onkoSijaintiVarattujenTiilienListalla(int i, int j){
-        for (Tiili t: varatutTiilet){
-            if (t.getX()==i && t.getY()==j){
-                return true;
+        for (Huone h:huoneet){
+            for (Tiili t: h.osat){
+                if (t.getX()==i && t.getY()==j){
+                    return true;
+                }
             }
         }
         return false;

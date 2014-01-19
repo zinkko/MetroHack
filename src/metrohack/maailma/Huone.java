@@ -19,6 +19,15 @@ public class Huone {
     private int leveys; //huoneen pituus vaakasuunnassa
     private int pituus; //huoneen pituus pystysuunnassa
     private int x, y;
+    
+    /**
+     * 
+     * @param kaikki 
+     * @param leveys
+     * @param pituus
+     * @param x
+     * @param y 
+     */
 
     public Huone(List<Tiili> kaikki, int leveys, int pituus, int x, int y) {
         this.x = x;

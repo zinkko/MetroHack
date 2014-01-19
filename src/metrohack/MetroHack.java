@@ -13,7 +13,7 @@ import metrohack.UI.Piirtaja;
 import metrohack.UI.UserInterface;
 import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
-import metrohack.maailma.Tiili;
+import metrohack.maailma.TasoGeneraattori;
 import metrohack.maailma.Tiilityyppi;
 
 
@@ -32,7 +32,8 @@ public class MetroHack{
     public MetroHack(){
         //this.ui = new UserInterface(this,textBased);
         this.pelaaja = new Pelaaja(this, 10, "Pentti", 12,12);
-        this.luoEkaTaso();
+        //this.luoEkaTaso();
+        this.tasoNyt = (new TasoGeneraattori()).luoTaso();
         this.pelaaja.vaihdaTasoa(tasoNyt);
         
     }
