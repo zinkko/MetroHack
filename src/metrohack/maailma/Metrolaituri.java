@@ -21,12 +21,16 @@ public class Metrolaituri extends Huone {
 		this.kuvaus = "TÃ¤ltÃ¤ laiturilta kulkee linja " + linja + ". Otattehan metrolla matkustaessanne huomioon, ettÃ¤ ilman "
 		+ "asianomaista lippua matkustavilta voidaan periÃ¤ tarkastusmaksu 20 euroa.";
                 
-                for (Tiili t:tiilet) {
-                    if (t.getX() == x+pituus/2 && t.getY()== y +leveys/2){
-                        t.setTyyppi(Tiilityyppi.LAITURI);
-                    }
-                }
+                laitaLaituri();
 	}
+        
+        private void laitaLaituri(){
+            for (Tiili t:this.osat){
+                if (t.getY() == this.ylaReuna()-1 && t.getX()!=this.x && t.getX() != this.oikeaReuna()){
+                    t.setTyyppi(Tiilityyppi.LAITURI);
+                }
+            }
+        }
     
     
 

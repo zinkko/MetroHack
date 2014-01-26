@@ -47,17 +47,20 @@ public class TasoGeneraattori {
 
         int pituus = 30;
         int leveys = 10;
-
-        /* 
-         | 3 | 6 | 9 | n+2 | y
-         | 2 | 5 | 8 | n+1 | ^
-         | 1 | 4 | 7 | ... | |__ x 
-         */
+        
+        int n = 1;
+        
         for (int x = 0; x <= kokoX - pituus; x += pituus) {
             for (int y = 0; y <= kokoY - leveys; y += leveys) {
                 int a = random.nextInt(20);
                 int b = random.nextInt(4) + random.nextInt(4); // painota keskelle
-                taso.lisaaHuone(new Huone(taso.getTiilet(), x + a / 2, y + b / 2, pituus - a, leveys - b));
+                if (n==9){
+                    taso.lisaaHuone(new Metrolaituri(taso.getTiilet(),
+                            new Linja(),x + a/2, y + b/2, pituus - a, leveys - b));
+                }else{
+                    taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
+                }
+                n++;
             }
         }
         blockPlacementCorridors(taso);

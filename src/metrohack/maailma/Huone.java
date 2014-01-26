@@ -18,7 +18,7 @@ public class Huone {
     protected List<Tiili> seinatiilet;
     private int leveys; //huoneen pituus vaakasuunnassa
     private int pituus; //huoneen pituus pystysuunnassa
-    private int x, y;
+    protected int x, y;
     
     /**
      * 
