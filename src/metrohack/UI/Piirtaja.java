@@ -41,7 +41,7 @@ public class Piirtaja {
         if (this.piirtoAlusta==null){
             // graafinen
         }else{
-            char[][] map = new char[this.width][this.height];
+            char[][] map = new char[this.height][this.width];
             this.piirtoAlusta.setText(this.luoTekstiKuva(map));
         }
     }
@@ -56,16 +56,15 @@ public class Piirtaja {
     private String luoTekstiKuva(char[][] map){
         String kuva = "";
         piirraAsiat(map);
-        for (char[] taul:map){
-            for (char c : taul){
-                
+        for (char[] t:map){
+            for (char c:t){
                 if (c=='\u0000'){
                     c = ' ';
                 }
                 kuva = kuva + c;
             }
             kuva = kuva + "\n";
-        }
+        }           
         return kuva;
     }
     

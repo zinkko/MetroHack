@@ -28,7 +28,7 @@ public class UserInterface implements Runnable{
     private String fontName;
     
     public UserInterface(MetroHack peli, boolean isTextBased){
-        this.frame = new JFrame();
+        this.frame = new JFrame("MetroHack");
         this.isTextBased = isTextBased;
         this.peli = peli;     
     }
@@ -70,7 +70,7 @@ public class UserInterface implements Runnable{
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
         c.add(tekstikentta);
-        this.piirtaja = new Piirtaja(tekstikentta,30,100,this.peli);
+        this.piirtaja = new Piirtaja(tekstikentta,100,30,this.peli);
     }
    
     /**

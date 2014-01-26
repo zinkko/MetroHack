@@ -36,8 +36,8 @@ public class Taso {
             }
         }
         
-        //luoHuoneita();
-        luoTaso(huoneidenMaara, onkoKauppaa);
+        luoHuoneita();
+        //luoTaso(huoneidenMaara, onkoKauppaa);
     }
     
     public Taso(List<Linja> metrot){
@@ -80,15 +80,19 @@ public class Taso {
         }
         return false;
     }
+    
+    public List<Huone> huoneet(){
+        return this.huoneet;
+    }
 
     private void luoHuoneita() {
-        Huone h = new Huone(this.tiilet, 8, 4, 20, 10);
+        Huone h = new Huone(this.tiilet,8,4,20,10);
         this.huoneet.add(h);
         //this.huoneet.add(new Huone(this.tiilet,10,5,5,17));
     }
     
-    public Tiilityyppi getTiili(int y, int x){ // this flip just works
-        // TODO: mieti koordinaatteja, ja laita kaikki toimimaan hyvin ilman purkkaa
+    public Tiilityyppi getTiili(int x, int y){ 
+        
         for (Tiili t:this.tiilet){
             if (t.getX()==x && t.getY()==y){
                 return t.getTyyppi();             

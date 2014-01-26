@@ -42,7 +42,7 @@ public class Pelaaja extends Hahmo{
         
         public void liiku(int dx, int dy){
             Tiilityyppi t = this.tasoNyt.getTiili(x+dx, y+dy);
-            if (t== Tiilityyppi.SEINA && !testaustila){
+            if (t == Tiilityyppi.SEINA && !testaustila){
                 //System.out.println("Wall!");
                 return; // don't walk trhu walls
             }

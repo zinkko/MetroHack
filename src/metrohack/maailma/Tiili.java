@@ -6,6 +6,8 @@
 
 package metrohack.maailma;
 
+import static metrohack.maailma.Tiilityyppi.*;
+
 /**
  *
  * @author ilari
@@ -25,7 +27,7 @@ public class Tiili {
     
     public void piirra(char[][] map){
         try{
-            map[this.y][this.x] = this.tyyppi.getKuva();
+            map[map.length-y][x] = this.tyyppi.getKuva();
         }catch(ArrayIndexOutOfBoundsException ex){
             //
         }
@@ -37,11 +39,17 @@ public class Tiili {
     }
     
     public void setTyyppi(Tiilityyppi t){
-        if (this.tyyppi == Tiilityyppi.OVI || this.tyyppi == Tiilityyppi.LAITURI){
+        if (this.tyyppi == OVI || this.tyyppi == LAITURI){
             return;
         }
         this.tyyppi=t;
         
+    }
+    /**
+     * for testing only, remove when done
+     */
+    public void stomp(){
+        this.tyyppi = LAITURI;
     }
     
 

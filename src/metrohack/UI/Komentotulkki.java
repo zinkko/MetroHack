@@ -15,7 +15,7 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class Komentotulkki {
     
-    private static final String MOVE_CHARS = "ikjluom.";
+    private static final String MOVE_CHARS = "wasd";
     private static final char CMD_CHAR = '$';
     private boolean cmdMode = false;
     private String komento = "";
@@ -88,40 +88,24 @@ public class Komentotulkki {
         Pelaaja pelaaja = this.peli.getPelaaja();
         int dx,dy;
         switch(komento){
-            case "j":
-                dx=0;
-                dy=-1;
-                break;
-            case "l":
+            case "w":
                 dx=0;
                 dy=1;
                 break;
-            case "k":
+            case "s":
+                dx=0;
+                dy=-1;
+                break;
+            case "a":
+                dx=-1;
+                dy=0;
+                break;
+            case "d":
                 dx=1;
                 dy=0;
                 break;
-            case "i":
-                dx=-1;
-                dy=0;
-                break;
-            case "u":
-                dx=-1;
-                dy=-1;
-                break;
-            case ".":
-                dx=1;
-                dy=1;
-                break;
-            case "o":
-                dx=-1;
-                dy=1;
-                break;
-            case "m":
-                dx=1;
-                dy=-1;
-                break;
-                
             default:
+                System.out.println("err");
                 dx=0;
                 dy=0;
         }

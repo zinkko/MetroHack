@@ -29,7 +29,7 @@ public class Huone {
      * @param y 
      */
 
-    public Huone(List<Tiili> kaikki, int leveys, int pituus, int x, int y) {
+    public Huone(List<Tiili> kaikki,int x, int y, int pituus, int leveys) {
         this.x = x;
         this.y = y;
         this.leveys = leveys;
@@ -40,20 +40,24 @@ public class Huone {
 
         this.setSeinatiilet();
     }
+    
+    public Huone(List<Tiili> kaikki, int[] data){
+        this(kaikki, data[0],data[1],data[2],data[3]);
+    }
 
     @Override
     public String toString(){
-        return "("+this.x+","+this.y+") "+this.leveys+"x"+this.pituus;
+        return "("+this.x+","+this.y+") "+this.pituus+"x"+this.leveys;
     }
     
     private List<Tiili> valitseTiiletHuoneeseen(List<Tiili> kaikki) {
         List<Tiili> huoneenTiilet = new ArrayList<>();
 
         for (Tiili t : kaikki) {
-            if (t.getX() >= this.x && t.getX() < this.x + this.leveys
-                    && t.getY() >= this.y && t.getY() < this.y + this.pituus) {
+            if (t.getX() >= this.x && t.getX() < this.x + this.pituus
+                    && t.getY() >= this.y && t.getY() < this.y + this.leveys) {
                 t.setTyyppi(Tiilityyppi.LATTIA);
-                if (t.getX()==x || t.getY()==y|| t.getX() == x+leveys-1 || t.getY()==y+pituus-1){
+                if (t.getX()==x || t.getY()==y|| t.getX() == x+pituus-1 || t.getY()==y+leveys-1){
                     t.setTyyppi(Tiilityyppi.SEINA);
                 }
                 huoneenTiilet.add(t);
@@ -133,6 +137,14 @@ public class Huone {
 
     }
 
+    public int oikeaReuna(){
+        return x + pituus-1;
+    }
+    
+    public int ylaReuna(){
+        return y + leveys-1;
+    }
+    
     public int[] getSijainti() {
         return new int[]{x, y};
     }

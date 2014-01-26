@@ -31,6 +31,6 @@ public abstract class Hahmo {
 
     
     public void piirra(char[][] map){
-        map[x][y] = merkki;
+        map[map.length-y][x] = merkki;
     }
 }
