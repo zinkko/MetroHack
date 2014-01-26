@@ -45,15 +45,7 @@ public class Tiili {
         this.tyyppi=t;
         
     }
-    /**
-     * for testing only, remove when done
-     */
-    public void stomp(){
-        this.tyyppi = LAITURI;
-    }
-    
 
-    
     public int[] getSijainti(){
         int[] sijainti = new int[2];
         sijainti[0]=x;

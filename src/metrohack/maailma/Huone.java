@@ -66,6 +66,19 @@ public class Huone {
 
         return huoneenTiilet;
     }
+    
+    
+    public boolean asetaOvi(int x, int y){
+        for (Tiili t:this.osat){
+            if (t.getX()==x && t.getY() == y){
+                t.setTyyppi(Tiilityyppi.OVI);
+                //System.out.println("laita ovi! "+x+" "+y);
+                return true;
+               
+            }
+        }
+        return false;
+    }
 
     /*
      private List<Tiili> luoTyhjaHuone(int pituus, int leveys){
