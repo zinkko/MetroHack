@@ -16,7 +16,8 @@ import metrohack.maailma.entities.Pelaaja;
 public class Komentotulkki {
     
     private static final String MOVE_CHARS = "ijkluom.";
-    private static final char CMD_CHAR = '$';
+    public static final char CMD_CHAR = '$';
+    
     private boolean cmdMode = false;
     private String komento = "";
     private final MetroHack peli;
@@ -28,7 +29,7 @@ public class Komentotulkki {
     
     public void give(char cmd){
         if (this.piirtaja==null){
-            this.piirtaja=peli.getPiirtaja();
+            this.piirtaja = peli.getPiirtaja();
         }
         if (this.cmdMode){
             this.komento(cmd);
@@ -40,7 +41,7 @@ public class Komentotulkki {
             moveCommand(command);
         }else if (cmd==CMD_CHAR){
             this.cmdMode = true;
-            this.komento(CMD_CHAR);
+            this.piirtaja.naytaKomento("");
         }
         // lisää vaihtoehtoja
         
@@ -49,25 +50,28 @@ public class Komentotulkki {
     
     private void komento(char cmd){
         if (cmd == '\n'){
-            this.applyCommand(piirtaja.getKomento());
-            this.piirtaja.setPitkaKomento("");
+            this.applyCommand(komento);
+            this.piirtaja.naytaKomento(null);
             this.cmdMode = false;
         }else if (cmd == '\b'){ // del char
-            this.piirtaja.backspace();
+            this.komento = this.komento.substring(0, komento.length()-1);
         }else if ((int)cmd == 65535){ // this will come up with SHIFT,CTRL, etc
             //skip
         }else{
-            this.piirtaja.addCharToCmd(cmd);
+            this.komento += cmd;
+            this.piirtaja.naytaKomento(komento);
         }
         System.out.print(cmd);
         System.out.println(" "+(int) cmd);
     }
     
     private void applyCommand(String cmd){
-        System.out.println("command!\nto be implemented...");
+        //System.out.println("command!\nto be implemented...");
         switch (cmd){
             case "ankka":
-                this.piirtaja.piirraYstavaAnkka();
+                if (piirtaja.getClass() == TekstiPiirtaja.class){
+                    ((TekstiPiirtaja) this.piirtaja).piirraYstavaAnkka();
+                }
                 break;
             case "test":
                 this.peli.setWalkThruWalls(true);

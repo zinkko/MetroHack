@@ -6,6 +6,7 @@
 
 package metrohack.UI;
 
+import java.awt.Color;
 import metrohack.MetroHack;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -70,7 +71,7 @@ public class UserInterface implements Runnable{
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
         c.add(tekstikentta);
-        this.piirtaja = new Piirtaja(tekstikentta,100,30,this.peli);
+        this.piirtaja = new TekstiPiirtaja(tekstikentta,100,30,this.peli);
     }
    
     /**
