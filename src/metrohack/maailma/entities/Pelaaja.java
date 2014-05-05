@@ -17,14 +17,13 @@ public class Pelaaja extends Hahmo{
 	private Reppu reppu;
         private boolean testaustila = false;
         private Taso tasoNyt;
-        private MetroHack peli;
+        //private MetroHack peli;
 	
-	public Pelaaja(MetroHack peli, int vitutus, String nimi, int x, int y){
+	public Pelaaja(int vitutus, String nimi, int x, int y){
 		super(vitutus, nimi, x, y);
 		this.ruoka = 10;
 		this.reppu = new Reppu(10, 10);
                 this.merkki = '@';
-                this.peli = peli;
                 
 	}
         

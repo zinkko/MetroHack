@@ -9,7 +9,5 @@ package metrohack.maailma.entities;
  * @author Kulmala
  */
 public enum TavaranTyyppi {
-
-	LIPPU, RUOKA, SUOJA, MUU,JUOTAVA;
+    LIPPU, RUOKA, SUOJA, MUU, JUOTAVA;
 }
-

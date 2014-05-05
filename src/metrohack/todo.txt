@@ -1,0 +1,30 @@
+FEATURET
+
+- tee hieno tasogeneraattori
+    - mutkaiset käytävät
+    - max n huonetta jossa n<9
+    - lisää ankkoja
+
+- lisää tilaa printeille
+
+- näytä HP ja nälkä muuta kivaa
+
+- monsuja
+
+- aseman (= levun) nimi näkyviin
+
+- tasosiirtymät
+    - metrokartta
+
+- rajapinnoita käli
+
+- inventaario
+    - näytä reppu
+    - käytä reppu
+
+
+
+
+BUGIT
+
+- komennot + backspace tuottaa ongelmia

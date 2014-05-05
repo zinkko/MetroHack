@@ -31,6 +31,10 @@ public class Metrolaituri extends Huone {
                 }
             }
         }
+        
+        public String getKuvaus(){
+            return this.kuvaus;
+        }
     
     
 

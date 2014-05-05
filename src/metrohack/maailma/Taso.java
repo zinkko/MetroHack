@@ -8,12 +8,12 @@ package metrohack.maailma;
 import metrohack.maailma.entities.Hahmo;
 import java.util.*;
 
+
 /**
- *
+ * 
  * @author ilari
  */
 public class Taso {
-
     private String name;
     private List<Huone> huoneet;
     private List<Hahmo> hahmot;
@@ -251,6 +251,10 @@ public class Taso {
         for (Hahmo h : hahmot) {
             h.piirra(map); // hahmot piirretään päälle
         }
+    }
+    
+    public void lisaaHahmo(Hahmo h){
+        this.hahmot.add(h);
     }
 
 }

@@ -9,17 +9,18 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import metrohack.maailma.entities.Monsteri;
 
 /**
  *
  * @author ilari
  */
-public class TasoGeneraattori {
+public class Tasotehdas {
 
     private Random random;
     private int kokoX, kokoY;
 
-    public TasoGeneraattori() {
+    public Tasotehdas() {
         kokoX = 100;
         kokoY = 30;
         this.random = new Random();
@@ -27,11 +28,12 @@ public class TasoGeneraattori {
 
     public Taso luoTaso() {
         Taso taso = new Taso(new ArrayList<Linja>());
-
         //Huone siemen = new Huone(taso.getTiilet(),10,10,kokoX/2-5,kokoY/3-5);
         //taso.lisaaHuone(siemen);
         //tiputaReunoilta(taso);
         blockPlacement(taso);
+        
+        taso.lisaaHahmo(new Monsteri(5, "viemärirotta",60,25,1));
 
         return taso;
     }
