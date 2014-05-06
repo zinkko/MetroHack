@@ -6,7 +6,6 @@
 
 package metrohack.UI;
 
-import java.awt.Color;
 import metrohack.MetroHack;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -15,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
+import metrohack.logiikka.Pelilogiikka;
 
 /**
  *
@@ -24,17 +24,17 @@ public class UserInterface implements Runnable{
     
     private final JFrame frame;
     private final boolean isTextBased;
-    private final MetroHack peli;
+    private final Pelilogiikka peli;
     private Piirtaja piirtaja;
     private String fontName;
     
-    public UserInterface(MetroHack peli, boolean isTextBased){
+    public UserInterface(Pelilogiikka peli, boolean isTextBased){
         this.frame = new JFrame("MetroHack");
         this.isTextBased = isTextBased;
         this.peli = peli;     
     }
     
-    public UserInterface(MetroHack peli, String fontName){
+    public UserInterface(Pelilogiikka peli, String fontName){
         this(peli,true);
         this.fontName = fontName;
     }

@@ -16,7 +16,7 @@ public abstract class Hahmo {
     protected Tiili paikka;
     protected char merkki;
     protected String nimi;
-    protected int vitutus; //hit points (HP!!)
+    protected int vitutus; //hit points
     protected int x;
     protected int y;
 
@@ -28,6 +28,10 @@ public abstract class Hahmo {
     }
 
     public void piirra(char[][] map) {
-        map[map.length - y][x] = merkki;
+        try{
+            map[map.length - y][x] = merkki;
+        }catch(ArrayIndexOutOfBoundsException ex){
+            
+        }
     }
 }

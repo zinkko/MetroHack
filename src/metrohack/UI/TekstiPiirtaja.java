@@ -8,7 +8,7 @@ package metrohack.UI;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import metrohack.MetroHack;
+import metrohack.logiikka.Pelilogiikka;
 
 
 /**
@@ -17,7 +17,7 @@ import metrohack.MetroHack;
  */
 public class TekstiPiirtaja implements Piirtaja{
     private int width,height;
-    private MetroHack peli;
+    private Pelilogiikka peli;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
     //private final int tulostusRivi = 25; //
@@ -25,7 +25,7 @@ public class TekstiPiirtaja implements Piirtaja{
     private String pitkaKomento = null;
     private boolean enableFriendDuck = false;
     
-    public TekstiPiirtaja(JTextArea teksti,int w, int h, MetroHack peli){
+    public TekstiPiirtaja(JTextArea teksti,int w, int h, Pelilogiikka peli){
         this.piirtoAlusta = teksti;
         this.width = w;
         this.height = h;

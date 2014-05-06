@@ -6,7 +6,7 @@
 
 package metrohack.UI;
 
-import metrohack.MetroHack;
+import metrohack.logiikka.Pelilogiikka;
 import metrohack.maailma.entities.Pelaaja;
 
 /**
@@ -15,15 +15,15 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class Komentotulkki {
     
-    private static final String MOVE_CHARS = "ijkluom.";
+    private static final String MOVE_CHARS = "awsdqezcx";
     public static final char CMD_CHAR = '$';
     
     private boolean cmdMode = false;
     private String komento = "";
-    private final MetroHack peli;
+    private final Pelilogiikka peli;
     private Piirtaja piirtaja;
     
-    public Komentotulkki(MetroHack peli){
+    public Komentotulkki(Pelilogiikka peli){
         this.peli = peli;
     }
     
@@ -73,12 +73,12 @@ public class Komentotulkki {
                     ((TekstiPiirtaja) this.piirtaja).piirraYstavaAnkka();
                 }
                 break;
-            case "test":
-                this.peli.setWalkThruWalls(true);
+            /*case "test":
+                //this.peli.setWalkThruWalls(true);
                 break;
             case "test off":
-                this.peli.setWalkThruWalls(false);
-                break;
+                //this.peli.setWalkThruWalls(false);
+                break;*/
             case "reppu":
                 this.piirtaja.tulosta(peli.getPelaaja().getReppu().repunSisalto());
                 break;
@@ -90,37 +90,38 @@ public class Komentotulkki {
     
     private void moveCommand(String komento){
         Pelaaja pelaaja = this.peli.getPelaaja();
+        peli.vuoro();
         int dx,dy;
         switch(komento){
-            case "i":
+            case "w":
                 dx=0;
                 dy=1;
                 break;
-            case "k":
+            case "s":
                 dx=0;
                 dy=-1;
                 break;
-            case "j":
+            case "a":
                 dx=-1;
                 dy=0;
                 break;
-            case "l":
+            case "d":
                 dx=1;
                 dy=0;
                 break;
-            case "o":
+            case "e":
                 dx=1;
                 dy=1;
                 break;
-            case "m":
+            case "z":
                 dx=-1;
                 dy=-1;
                 break;
-            case "u":
+            case "q":
                 dx=-1;
                 dy=1;
                 break;
-            case ".":
+            case "c":
                 dx=1;
                 dy=-1;
                 break;    

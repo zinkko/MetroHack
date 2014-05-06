@@ -33,7 +33,7 @@ public class Tasotehdas {
         //tiputaReunoilta(taso);
         blockPlacement(taso);
         
-        taso.lisaaHahmo(new Monsteri(5, "viemärirotta",60,25,1));
+        //taso.lisaaHahmo(new Monsteri(5, "viemärirotta",60,25,1));
 
         return taso;
     }
@@ -61,6 +61,8 @@ public class Tasotehdas {
                             new Linja(),x + a/2, y + b/2, pituus - a, leveys - b));
                 }else{
                     taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
+                    System.out.println(x+", "+y);
+                    taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x ,y ,1));
                 }
                 n++;
             }

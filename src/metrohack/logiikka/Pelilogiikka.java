@@ -6,9 +6,17 @@
 
 package metrohack.logiikka;
 
+import java.util.ArrayList;
 import java.util.List;
+import metrohack.UI.Piirtaja;
+import metrohack.UI.UserInterface;
 import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
+import metrohack.maailma.Tasotehdas;
+import metrohack.maailma.Tiilityyppi;
+import metrohack.maailma.entities.Hahmo;
+import metrohack.maailma.entities.Monsteri;
+import metrohack.maailma.entities.Pelaaja;
 
 /**
  *
@@ -16,10 +24,60 @@ import metrohack.maailma.Taso;
  */
 public class Pelilogiikka {
     
-    private List<Taso> tasot;
-    private List<Linja> metrolinjat;
+    private UserInterface ui;
+    private final List<Taso> tasot;
+    private final List<Linja> metrolinjat;
+    private Pelaaja pelaaja;
+    private final Tasotehdas tehdas;
+    private Taso tasoNyt;
+    
+    public Pelilogiikka(Tasotehdas tehdas){
+        this.tasot = new ArrayList<>();
+        this.tehdas = tehdas;
+        this.metrolinjat = new ArrayList<>();
+        alustaMaailma();
+    }
+    
+    private void alustaMaailma(){
+        this.pelaaja = new Pelaaja(20, "ilpo", 15, 25);
+        tasoNyt = tehdas.luoTaso();
+        
+        pelaaja.vaihdaTasoa(tasoNyt);
+    }
+    
+    public void setUI(UserInterface ui){
+        this.ui = ui;
+    }
     
     public void vuoro(){
-        
+        for (Hahmo h: this.tasoNyt.getHahmot()){
+            if (h.getClass() == Monsteri.class){
+                ((Monsteri) h).liiku();
+            }
+        }
+    }
+    
+    public void tulosta(String s){
+        this.ui.tulosta(s);
+    }
+    
+    public Tiilityyppi getTiili(int x, int y){
+        return this.tasoNyt.getTiili(x, y);
+    }
+    
+    public Pelaaja getPelaaja(){
+        return this.pelaaja;
+    }
+    
+    public Taso getCurrentLevel(){
+        return tasoNyt;
+    }
+    
+    public void piirra(){
+        this.ui.piirra();
+    }
+    
+    public Piirtaja getPiirtaja(){
+        return this.ui.getPiirtaja();
     }
 }

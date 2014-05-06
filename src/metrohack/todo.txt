@@ -17,14 +17,17 @@ FEATURET
     - metrokartta
 
 - rajapinnoita käli
+    - UI rajapinnaksi
+    - Tulostinrajapinta => tekstipiirtaja / GUI
 
 - inventaario
     - näytä reppu
     - käytä reppu
 
-
+- näkyvyyden rajoitus
+    -testimoodi
 
 
 BUGIT
 
-- komennot + backspace tuottaa ongelmia
+- $-komennot (Komentotulkki) toimii nihkeästi
