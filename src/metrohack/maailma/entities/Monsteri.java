@@ -29,6 +29,11 @@ public class Monsteri extends Hahmo {
         return false;
     }
     
+    //tän kun toteuttaa, niin homma ehkä toimii. tarvii vaan tiedon siitä, törmääkö liikkuessaan
+    private boolean liikuYksi(int muutosX, int muutosY){ 
+        return false;
+    }
+    
     public void liiku(){
         if (nakeekoPelaajan()){
             liikuKohtiPelaajaa();
@@ -45,7 +50,20 @@ public class Monsteri extends Hahmo {
         if (Math.abs(tavoiteX-x) + Math.abs(tavoiteY-y)<10){
             arvoUusiSatunnainenPaikka();
         }
-        //else liiku kohti sitä paikkaa
+        int muutosY = 0;
+        int muutosX = 0;
+        if (tavoiteX<x){
+            muutosX--;
+        } else if (tavoiteY<y){
+            muutosY--;
+        } else if (tavoiteX>x){
+            muutosX++;
+        } else if (tavoiteY>y){
+            muutosY++;
+        }
+        if (!liikuYksi(muutosX, muutosY)){ //jos liikkuminen ei onnistu, kokeillaan eri suuntaan, jotta monsu ei ehkä jää jumiin
+            liikuYksi(-1*muutosX, -1*muutosY);
+        }
     }
     
     private void arvoUusiSatunnainenPaikka(){

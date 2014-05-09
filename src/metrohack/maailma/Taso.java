@@ -62,6 +62,10 @@ public class Taso {
         this.huoneet.add(h);
     }
     
+    public void lisaaTavara(String nimi){
+        //toteuta tämä...
+    }
+    
     public boolean collide(int x, int y, int pituus, int leveys){
         
         for (Huone huone : this.huoneet){

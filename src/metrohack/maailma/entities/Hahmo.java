@@ -34,4 +34,8 @@ public abstract class Hahmo {
             
         }
     }
+    
+    public boolean onkoPaikkaLaillinen(int x, int y){
+        return false;
+    }
 }
