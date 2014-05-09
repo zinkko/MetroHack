@@ -62,7 +62,7 @@ public class Tasotehdas {
                 }else{
                     taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
                     System.out.println(x+", "+y);
-                    taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x ,y ,1));
+                    taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x+ a/2+2 ,y+ b/2+2 ,1));
                 }
                 n++;
             }
