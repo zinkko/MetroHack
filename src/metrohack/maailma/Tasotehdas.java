@@ -33,9 +33,19 @@ public class Tasotehdas {
         //tiputaReunoilta(taso);
         blockPlacement(taso);
         
+        asetaHahmot(taso);
         //taso.lisaaHahmo(new Monsteri(5, "viemärirotta",60,25,1));
 
         return taso;
+    }
+    
+    private void asetaHahmot(Taso t){
+        for (Huone h: t.huoneet()){
+            int x = h.getY() + h.getLeveys()/2;
+            int y = h.getX() + h.getLeveys()/2;
+            
+            t.lisaaHahmo(new Monsteri(10,"höyrykaivuri",x,y,1));
+        }
     }
 
     private void tiputaReunoilta(Taso taso) {
@@ -61,8 +71,6 @@ public class Tasotehdas {
                             new Linja(),x + a/2, y + b/2, pituus - a, leveys - b));
                 }else{
                     taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
-                    System.out.println(x+", "+y);
-                    taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x+ a/2+2 ,y+ b/2+2 ,1));
                 }
                 n++;
             }
@@ -81,8 +89,8 @@ public class Tasotehdas {
             if (xypl != null) {
                 kaytavat.add(new Huone(taso.getTiilet(), xypl));
             } else {
-                System.out.println("was null");
-                System.out.println(eka + " <> " + toka);
+  //              System.out.println("was null");
+  //              System.out.println(eka + " <> " + toka);
             }
 
             eka = toka;
@@ -148,7 +156,7 @@ public class Tasotehdas {
         boolean b2 = huone2.asetaOvi(x2, y2);
         
         if (!(b1 && b2)){
-            System.out.println(x1+","+y1+" "+x2+","+y2);
+    //        System.out.println(x1+","+y1+" "+x2+","+y2);
         }
 
         return palauta;

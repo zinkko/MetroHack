@@ -48,7 +48,6 @@ public class Pelaaja extends Hahmo{
             //System.out.println(t);
             this.x += dx;
             this.y += dy;
-            
             //this.peli.tulosta(this.x+","+this.y);
         }
 

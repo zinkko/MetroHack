@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 
-package metrohack.UI;
+package metrohack.UI.piirto;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import metrohack.logiikka.Pelilogiikka;
+import metrohack.maailma.entities.Hahmo;
 
 
 /**
@@ -87,7 +88,7 @@ public class TekstiPiirtaja implements Piirtaja{
         this.paivitaHahmot(map);
         this.piirraTulosteet(map);
         this.piirraStatsit(map);
-        if (pitkaKomento != null) this.piirraTaikoja(map);
+        //if (pitkaKomento != null) this.piirraTaikoja(map);
         // piirrä päälle
     }
     
@@ -97,10 +98,10 @@ public class TekstiPiirtaja implements Piirtaja{
     }
     
     private void piirraTaikoja(char[][] map){
-        map[0][0] = Komentotulkki.CMD_CHAR;
-        for (int i=0;i<this.pitkaKomento.length();i++){
-            map[0][i+1] = this.pitkaKomento.charAt(i);
-        }
+        //map[0][0] = Komentotulkki.CMD_CHAR;
+        //for (int i=0;i<this.pitkaKomento.length();i++){
+        //    map[0][i+1] = this.pitkaKomento.charAt(i);
+        //}
     }
     
     private void piirraTulosteet(char[][] map){
@@ -118,7 +119,9 @@ public class TekstiPiirtaja implements Piirtaja{
     }
     
     private void paivitaHahmot(char[][] map){
-        peli.getPelaaja().piirra(map);
+        for (Hahmo h: peli.getTaso().getHahmot()){
+            map[h.getX()][h.getY()] = h.getMerkki();
+        }
 
     }
     

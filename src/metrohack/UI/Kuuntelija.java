@@ -24,7 +24,11 @@ public class Kuuntelija implements KeyListener{
     
     @Override
     public void keyPressed(KeyEvent e){
-        this.tulkki.give(e.getKeyChar());
+        char merkki = e.getKeyChar();
+        if ((int) merkki == 65535){
+            return;
+        }
+        this.tulkki.otaVastaanKomento(merkki);
     }
     
     @Override

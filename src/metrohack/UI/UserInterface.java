@@ -6,7 +6,7 @@
 
 package metrohack.UI;
 
-import metrohack.MetroHack;
+import metrohack.UI.piirto.*;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -56,6 +56,7 @@ public class UserInterface implements Runnable{
     
     private void luoGraafisetKomponentit(Container c){
         System.out.println("Hello World!");
+        this.piirtaja = new GraafinenPiirtaja();
         JPanel panel = new JPanel();
         panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli)));
         c.add(panel);

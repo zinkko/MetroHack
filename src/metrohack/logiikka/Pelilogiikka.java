@@ -8,7 +8,7 @@ package metrohack.logiikka;
 
 import java.util.ArrayList;
 import java.util.List;
-import metrohack.UI.Piirtaja;
+import metrohack.UI.piirto.Piirtaja;
 import metrohack.UI.UserInterface;
 import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
@@ -75,6 +75,10 @@ public class Pelilogiikka {
     
     public void piirra(){
         this.ui.piirra();
+    }
+    
+    public Taso getTaso(){
+        return this.tasoNyt;
     }
     
     public Piirtaja getPiirtaja(){

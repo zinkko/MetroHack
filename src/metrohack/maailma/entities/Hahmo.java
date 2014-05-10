@@ -27,11 +27,23 @@ public abstract class Hahmo {
         this.y = y;
     }
 
-    public void piirra(char[][] map) {
+   /* public void piirra(char[][] map) {
         try{
             map[map.length - y][x] = merkki;
         }catch(ArrayIndexOutOfBoundsException ex){
             
         }
+    }*/
+    
+    public int getX(){
+        return x;
+    }
+    
+    public int getY(){
+        return y;
+    }
+    
+    public char getMerkki(){
+        return merkki;
     }
 }
