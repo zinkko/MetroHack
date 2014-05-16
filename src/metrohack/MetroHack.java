@@ -20,7 +20,7 @@ public class MetroHack{
         String font;
         String osName = System.getProperty("os.name");
         if (osName.equals("Linux")){
-            font = "Courier";
+            font = "Andale Mono";
         }else{
             font = "Consolas";
         }

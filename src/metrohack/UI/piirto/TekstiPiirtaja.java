@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import metrohack.logiikka.Pelilogiikka;
 import metrohack.maailma.entities.Hahmo;
+import metrohack.maailma.entities.Pelaaja;
 
 
 /**
@@ -17,7 +18,7 @@ import metrohack.maailma.entities.Hahmo;
  * @author ilari
  */
 public class TekstiPiirtaja implements Piirtaja{
-    private int width,height;
+    private int leveys,korkeus;
     private Pelilogiikka peli;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
@@ -28,8 +29,8 @@ public class TekstiPiirtaja implements Piirtaja{
     
     public TekstiPiirtaja(JTextArea teksti,int w, int h, Pelilogiikka peli){
         this.piirtoAlusta = teksti;
-        this.width = w;
-        this.height = h;
+        this.leveys = w;
+        this.korkeus = h;
         this.peli = peli;
         this.print = new String[]{"hello","world","its","ilpo"};
     }
@@ -41,7 +42,7 @@ public class TekstiPiirtaja implements Piirtaja{
     @Override
     public void piirra(){
         if (this.piirtoAlusta!=null){
-            char[][] map = new char[this.height][this.width];
+            char[][] map = new char[this.leveys][this.korkeus];
             this.piirtoAlusta.setText(this.luoTekstiKuva(map));
         }
     }
@@ -56,24 +57,26 @@ public class TekstiPiirtaja implements Piirtaja{
     private String luoTekstiKuva(char[][] map){
         String kuva = "";
         piirraAsiat(map);
-        for (char[] t:map){
-            for (char c:t){
-                if (c=='\u0000'){
-                    c = ' ';
+        
+        for (int y = this.korkeus-1; y>=0; y--){
+            for (int x=0; x< this.leveys; x++){
+                if (map[x][y]=='\000'){
+                    kuva+=' ';
+                    continue;
                 }
-                kuva = kuva + c;
+                kuva += map[x][y];
             }
-            kuva = kuva + "\n";
-        }           
+            kuva += '\n';
+        }
         return kuva;
     }
     
     @Override
     public void tulosta(String teksti){
-        if (teksti.length()>this.width){
-            teksti = teksti.substring(0, this.width);
+        if (teksti.length()>this.leveys){
+            teksti = teksti.substring(0, this.leveys);
         }      
-        int tulostusRivi = height - this.print.length;
+        int tulostusRivi = korkeus - this.print.length;
         for (int i=1;i<this.print.length;i++){
             this.print[i-1] = this.print[i]; 
         }
@@ -84,7 +87,7 @@ public class TekstiPiirtaja implements Piirtaja{
     private void piirraAsiat(char[][] map){
         //piirrä alle
         this.paivitaHuoneet(map);
-        this.piirraAnkka(map);
+        //this.piirraAnkka(map);
         this.paivitaHahmot(map);
         this.piirraTulosteet(map);
         this.piirraStatsit(map);
@@ -120,8 +123,14 @@ public class TekstiPiirtaja implements Piirtaja{
     
     private void paivitaHahmot(char[][] map){
         for (Hahmo h: peli.getTaso().getHahmot()){
-            map[h.getX()][h.getY()] = h.getMerkki();
+            try{
+                map[h.getX()][h.getY()] = h.getMerkki();
+            }catch(ArrayIndexOutOfBoundsException ex){
+                System.out.println("hahmo out of bounds" + h);
+            }
         }
+        Pelaaja p = peli.getPelaaja();
+        map[p.getX()][p.getY()] = '@';
 
     }
     

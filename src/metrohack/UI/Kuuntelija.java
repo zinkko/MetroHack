@@ -8,6 +8,7 @@ package metrohack.UI;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import metrohack.UI.piirto.Piirtaja;
 
 /**
  *
@@ -15,11 +16,12 @@ import java.awt.event.KeyListener;
  */
 public class Kuuntelija implements KeyListener{
     
-    //private Modifier mod;
     private final Komentotulkki tulkki;
+    private final Piirtaja piirtaja;
     
-    public Kuuntelija(Komentotulkki t){
+    public Kuuntelija(Komentotulkki t, Piirtaja p){
         this.tulkki = t;
+        this.piirtaja = p;
     }
     
     @Override
@@ -29,6 +31,7 @@ public class Kuuntelija implements KeyListener{
             return;
         }
         this.tulkki.otaVastaanKomento(merkki);
+        this.piirtaja.piirra();
     }
     
     @Override

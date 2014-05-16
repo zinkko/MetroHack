@@ -19,7 +19,7 @@ public class Komentotulkki {
     
     private Pelilogiikka logiikka;
     
-    private static final String MOVE_CHARS = "qweasdzxc";
+    private static final String MOVE_CHARS = "qweaxdzsc";
     
     public Komentotulkki(Pelilogiikka peli){
         this.logiikka = peli;
@@ -50,7 +50,7 @@ public class Komentotulkki {
     private void liiku(String komento){
         int i = MOVE_CHARS.indexOf(komento);
         int x = i%3-1;
-        int y = i/3-1;
+        int y = -1*(i/3-1);
         logiikka.getPelaaja().liiku(x, y);
     }
     

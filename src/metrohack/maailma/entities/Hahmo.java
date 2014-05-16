@@ -35,6 +35,11 @@ public abstract class Hahmo {
         }
     }*/
     
+    @Override
+    public String toString(){
+        return this.nimi + "@"+x+","+y;
+    }
+    
     public int getX(){
         return x;
     }

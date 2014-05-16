@@ -80,31 +80,7 @@ public class Huone {
         return false;
     }
 
-    /*
-     private List<Tiili> luoTyhjaHuone(int pituus, int leveys){
-     List<Tiili> ret = new LinkedList<>();
-     Tiilityyppi nxt;
-     for (int i=this.x;i<this.x+this.pituus;i++){
-     for (int j=this.y;j<this.y+this.leveys;j++){
-     if (i==this.x || j==this.y || i==this.x+this.pituus-1
-     || j==this.y+this.leveys-1){
-     nxt = Tiilityyppi.SEINA;
-     if (i==this.x && j==this.y || i==this.x+this.pituus-1
-     && j==this.y+this.leveys-1 ||i==this.x && j ==this.leveys-1 ||i==this.pituus-1 && j==this.y){
-     //tämä on nurkka, ignore
-     } else {
-     seinatiilet.add(new Tiili(i,j,nxt)); //lisätään seinätiililistaan, jota tarvitaan toisaalla
-     }
-     }
-     else{
-     nxt = Tiilityyppi.LATTIA;
-     }
-     ret.add(new Tiili(i,j,nxt));
-     }
-     }
-        
-     return ret;
-     }*/
+
     public int MillaSeinallaTiiliOn(int x, int y) {
         // 1=P, 2=I, 3=E, 4=L ja nolla virhe
         for (Tiili t : seinatiilet) {

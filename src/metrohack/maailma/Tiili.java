@@ -27,7 +27,7 @@ public class Tiili {
     
     public void piirra(char[][] map){
         try{
-            map[map.length-y][x] = this.tyyppi.getKuva();
+            map[x][y] = this.tyyppi.getKuva();
         }catch(ArrayIndexOutOfBoundsException ex){
             //
         }
