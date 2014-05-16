@@ -58,7 +58,7 @@ public class UserInterface implements Runnable{
         System.out.println("Hello World!");
         this.piirtaja = new GraafinenPiirtaja();
         JPanel panel = new JPanel();
-        panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli),this.piirtaja));
+        panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli),this));
         c.add(panel);
     }
     
@@ -67,7 +67,7 @@ public class UserInterface implements Runnable{
         JTextArea tekstikentta = new JTextArea();
         Komentotulkki t = new Komentotulkki(peli);
         this.piirtaja = new TekstiPiirtaja(tekstikentta,100,30,this.peli);
-        Kuuntelija k = new Kuuntelija(t,this.piirtaja);
+        Kuuntelija k = new Kuuntelija(t,this);
         tekstikentta.setFont(new Font(this.fontName,Font.PLAIN,17));
         tekstikentta.setText("Hello World");
         tekstikentta.addKeyListener(k);

@@ -41,19 +41,13 @@ public class Tasotehdas {
     
     private void asetaHahmot(Taso t){
         for (Huone h: t.huoneet()){
-            int x = h.getY() + h.getLeveys()/2;
-            int y = h.getX() + h.getLeveys()/2;
+            int x = h.getX() + h.getLeveys()/2;
+            int y = h.getY() + h.getPituus()/2;
             
             t.lisaaHahmo(new Monsteri(10,"höyrykaivuri",x,y,1));
         }
     }
 
-    private void tiputaReunoilta(Taso taso) {
-        while (true) {
-            int[] xypl = new int[4];// x, y, pituus, leveys
-            break;
-        }
-    }
 
     private void blockPlacement(Taso taso) {
 

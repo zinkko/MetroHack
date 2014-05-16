@@ -31,10 +31,11 @@ public class Komentotulkki {
         }else{
             pitka(komento);
         }
+        this.logiikka.piirra();
     }
     
     public void otaVastaanKomento(char komento){
-        lyhyt(""+komento);
+        otaVastaanKomento(""+komento);
     }
     
     private void lyhyt(String komento){
@@ -52,6 +53,7 @@ public class Komentotulkki {
         int x = i%3-1;
         int y = -1*(i/3-1);
         logiikka.getPelaaja().liiku(x, y);
+        logiikka.vuoro();
     }
     
 //    

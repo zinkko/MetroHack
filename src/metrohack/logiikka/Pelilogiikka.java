@@ -53,8 +53,17 @@ public class Pelilogiikka {
         for (Hahmo h: this.tasoNyt.getHahmot()){
             if (h.getClass() == Monsteri.class){
                 ((Monsteri) h).liiku();
+                if (h.getX() == pelaaja.getX() && h.getY() == pelaaja.getY()){
+                    System.out.println("bump");
+                }
             }
         }
+        
+        onkoPelaajaLaiturilla();
+    }
+    
+    private void onkoPelaajaLaiturilla(){
+        
     }
     
     public void tulosta(String s){
