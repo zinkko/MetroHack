@@ -51,4 +51,8 @@ public abstract class Hahmo {
     public char getMerkki(){
         return merkki;
     }
+    
+    public boolean onkoPaikkaLaillinen(int x, int y){
+        return false;
+    }
 }

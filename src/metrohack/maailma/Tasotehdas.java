@@ -19,11 +19,14 @@ public class Tasotehdas {
 
     private Random random;
     private int kokoX, kokoY;
+    private ArrayList<String> tavarat;
 
     public Tasotehdas() {
         kokoX = 100;
         kokoY = 30;
         this.random = new Random();
+        this.tavarat = new ArrayList<>();
+        luoTavaralista();
     }
 
     public Taso luoTaso() {
@@ -63,8 +66,11 @@ public class Tasotehdas {
                 if (n==9){
                     taso.lisaaHuone(new Metrolaituri(taso.getTiilet(),
                             new Linja(),x + a/2, y + b/2, pituus - a, leveys - b));
+                    //taso.lisaaTavara(tavarat.get(random.nextInt(9))); //joskus tästä tulee fiksu testaus...
                 }else{
                     taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
+                    System.out.println(x+", "+y);
+                    taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x+ a/2+2 ,y+ b/2+2 ,1)); //koevaiheessa joka huoneeseen monsu
                 }
                 n++;
             }
@@ -154,5 +160,16 @@ public class Tasotehdas {
         }
 
         return palauta;
+    }
+
+    private void luoTavaralista() {
+        tavarat.add("kertalippu");
+        tavarat.add("kausilippu");
+        tavarat.add("patonki");
+        tavarat.add("kebab-ateria");
+        tavarat.add("muffini");
+        tavarat.add("omena");
+        tavarat.add("korvatulpat");
+        tavarat.add("rahakasa");
     }
 }
