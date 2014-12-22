@@ -24,7 +24,7 @@ public class MetroHack{
         }else{
             font = "Consolas";
         }
-        // default t textbased UI for now
+        // default to textbased UI for now
         
         Tasotehdas tehdas = new Tasotehdas();
         Pelilogiikka logiikka = new Pelilogiikka(tehdas);

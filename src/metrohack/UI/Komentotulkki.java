@@ -18,11 +18,21 @@ import metrohack.maailma.entities.Pelaaja;
 public class Komentotulkki {
     
     private Pelilogiikka logiikka;
+    private boolean onPitkaKomento;
+    private String puskuri;
     
+    private static final char KOMENTO_MERKKI = '$';
     private static final String MOVE_CHARS = "qweaxdzsc";
-    
+    /*
+    * q w e \ ^ /
+    * a x d < + >
+    * z s c / v \
+    */
+
     public Komentotulkki(Pelilogiikka peli){
         this.logiikka = peli;
+        this.puskuri = "";
+        this.onPitkaKomento = false;
     }
     
     public void otaVastaanKomento(String komento){
@@ -34,18 +44,43 @@ public class Komentotulkki {
         this.logiikka.piirra();
     }
     
+    /**
+     * näppiksen kuuntelija kutsuu tätä metodia
+     * @param komento painettu merkki
+     */
     public void otaVastaanKomento(char komento){
-        otaVastaanKomento(""+komento);
+        
+        if (this.onPitkaKomento) {
+            if (komento == '\n'){
+                otaVastaanKomento(this.puskuri);
+                this.onPitkaKomento = false;
+                this.puskuri = "";
+            }else if (komento == '\b' && this.puskuri.length()!=0){
+                this.puskuri = this.puskuri.substring(0, this.puskuri.length()-1);
+            }else{
+                puskuri = puskuri + komento;
+            }
+            ((TekstiPiirtaja)this.logiikka.getPiirtaja()).setPitkaKomento(puskuri);
+            return;
+        }
+
+        if (komento == KOMENTO_MERKKI){
+            this.onPitkaKomento = true;
+        }else{
+            otaVastaanKomento(""+komento);
+        }
     }
     
     private void lyhyt(String komento){
         if (MOVE_CHARS.contains(komento)){
             liiku(komento);
         }
+        
+        // check for other chars
     }
     
     private void pitka(String komento){
-        
+        System.out.println("sanoit: "+komento);
     }
     
     private void liiku(String komento){
@@ -55,124 +90,4 @@ public class Komentotulkki {
         logiikka.getPelaaja().liiku(x, y);
         logiikka.vuoro();
     }
-    
-//    
-//    private static final String MOVE_CHARS = "awsdqezcx";
-//    public static final char CMD_CHAR = '$';
-//    
-//    private boolean cmdMode = false;
-//    private String komento = "";
-//    private final Pelilogiikka peli;
-//    private Piirtaja piirtaja;
-//    
-//    public Komentotulkki(Pelilogiikka peli){
-//        this.peli = peli;
-//    }
-//    
-//    public void give(char cmd){
-//        if (this.piirtaja==null){
-//            this.piirtaja = peli.getPiirtaja();
-//        }
-//        if (this.cmdMode){
-//            this.komento(cmd);
-//            return;
-//        }
-//        String command = new String(new char[]{cmd});
-//        
-//        if(Komentotulkki.MOVE_CHARS.contains(command)){
-//            moveCommand(command);
-//        }else if (cmd==CMD_CHAR){
-//            this.cmdMode = true;
-//            this.piirtaja.naytaKomento("");
-//        }
-//         lisää vaihtoehtoja
-//        
-//        this.peli.piirra();
-//    }
-//    
-//    private void komento(char cmd){
-//        if (cmd == '\n'){
-//            this.applyCommand(komento);
-//            this.piirtaja.naytaKomento(null);
-//            this.cmdMode = false;
-//        }else if (cmd == '\b'){ // del char
-//            this.komento = this.komento.substring(0, komento.length()-1);
-//        }else if ((int)cmd == 65535){ // this will come up with SHIFT,CTRL, etc
-//            skip
-//        }else{
-//            this.komento += cmd;
-//            this.piirtaja.naytaKomento(komento);
-//        }
-//        System.out.print(cmd);
-//        System.out.println(" "+(int) cmd);
-//    }
-//    
-//    private void applyCommand(String cmd){
-//        System.out.println("command!\nto be implemented...");
-//        switch (cmd){
-//            case "ankka":
-//                if (piirtaja.getClass() == TekstiPiirtaja.class){
-//                    ((TekstiPiirtaja) this.piirtaja).piirraYstavaAnkka();
-//                }
-//                break;
-//            /*case "test":
-//                this.peli.setWalkThruWalls(true);
-//                break;
-//            case "test off":
-//                this.peli.setWalkThruWalls(false);
-//                break;*/
-//            case "reppu":
-//                this.piirtaja.tulosta(peli.getPelaaja().getReppu().repunSisalto());
-//                break;
-//            default:
-//                this.piirtaja.tulosta("outo komento :O");
-//        }
-//    }
-//            
-//    
-//    private void moveCommand(String komento){
-//        Pelaaja pelaaja = this.peli.getPelaaja();
-//        peli.vuoro();
-//        int dx,dy;
-//        switch(komento){
-//            case "w":
-//                dx=0;
-//                dy=1;
-//                break;
-//            case "s":
-//                dx=0;
-//                dy=-1;
-//                break;
-//            case "a":
-//                dx=-1;
-//                dy=0;
-//                break;
-//            case "d":
-//                dx=1;
-//                dy=0;
-//                break;
-//            case "e":
-//                dx=1;
-//                dy=1;
-//                break;
-//            case "z":
-//                dx=-1;
-//                dy=-1;
-//                break;
-//            case "q":
-//                dx=-1;
-//                dy=1;
-//                break;
-//            case "c":
-//                dx=1;
-//                dy=-1;
-//                break;    
-//            default:
-//                System.out.println("err");
-//                dx=0;
-//                dy=0;
-//        }
-//        this.peli.tulosta("liikuit suuntaan "+ dx + "," + dy);
-//        pelaaja.liiku(dx, dy);
-//    }
 }

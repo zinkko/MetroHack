@@ -24,7 +24,7 @@ public class TekstiPiirtaja implements Piirtaja{
     private JPanel paneeli;
     //private final int tulostusRivi = 25; //
     private String[] print;
-    private String pitkaKomento = null;
+    private String pitkaKomento = "";
     private boolean enableFriendDuck = false;
     
     public TekstiPiirtaja(JTextArea teksti,int w, int h, Pelilogiikka peli){
@@ -55,7 +55,7 @@ public class TekstiPiirtaja implements Piirtaja{
      * @return kuva tekstimuodossa 
      */
     private String luoTekstiKuva(char[][] map){
-        String kuva = "";
+        String kuva = "$"+this.pitkaKomento + "\n";
         piirraAsiat(map);
         
         for (int y = this.korkeus-1; y>=0; y--){
@@ -68,6 +68,8 @@ public class TekstiPiirtaja implements Piirtaja{
             }
             kuva += '\n';
         }
+        kuva += "\n";
+        kuva += "\tHP 10 | kylläinen | mana 7 | buffs | ducks";
         return kuva;
     }
     
@@ -90,21 +92,11 @@ public class TekstiPiirtaja implements Piirtaja{
         //this.piirraAnkka(map);
         this.paivitaHahmot(map);
         this.piirraTulosteet(map);
-        this.piirraStatsit(map);
-        //if (pitkaKomento != null) this.piirraTaikoja(map);
         // piirrä päälle
     }
     
-    private void piirraStatsit(char[][] map){
-        //List<Stat> stats = this.peli.getPelaaja().getStats();
-        // odottaa implementaatiota...
-    }
-    
-    private void piirraTaikoja(char[][] map){
-        //map[0][0] = Komentotulkki.CMD_CHAR;
-        //for (int i=0;i<this.pitkaKomento.length();i++){
-        //    map[0][i+1] = this.pitkaKomento.charAt(i);
-        //}
+    private void piirraStatsit(){
+        
     }
     
     private void piirraTulosteet(char[][] map){
@@ -179,11 +171,11 @@ public class TekstiPiirtaja implements Piirtaja{
         piirra();
     }
     
-    /*public void setPitkaKomento(String s){
+    public void setPitkaKomento(String s){
         this.pitkaKomento = s;
         this.piirra();
     }
-    
+    /*
     public void addCharToCmd(char c){
         this.pitkaKomento += c;
         this.piirra();

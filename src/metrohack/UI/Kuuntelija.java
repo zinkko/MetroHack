@@ -14,17 +14,10 @@ import java.awt.event.KeyListener;
  */
 public class Kuuntelija implements KeyListener {
 
-    //private Modifier mod;
     private final Komentotulkki tulkki;
-    private final UserInterface ui;
-    private String buffer;
-    private boolean komentoKesken;
 
     public Kuuntelija(Komentotulkki t, UserInterface ui) {
         this.tulkki = t;
-        buffer = "";
-        komentoKesken = false;
-        this.ui = ui;
     }
 
     @Override
@@ -33,26 +26,9 @@ public class Kuuntelija implements KeyListener {
         if ((int) merkki == 65535) {
             return;
         }
-        if (merkki == '$') {
-            komentoKesken = true;
-            return;
-        }
-        if (komentoKesken) {
-            pitkaKomento(merkki);
-        }else{
-            this.tulkki.otaVastaanKomento(merkki);
-        }
-    }
-
-    private void pitkaKomento(char merkki) {
-        if (merkki == '\n') {
-            this.tulkki.otaVastaanKomento(buffer);
-            buffer = "";
-            komentoKesken = false;
-        } else {
-            buffer += merkki;
-        }
-        ui.getPiirtaja().naytaKomento(buffer);
+        
+        this.tulkki.otaVastaanKomento(merkki);
+        
     }
 
     @Override
