@@ -34,16 +34,7 @@ public class Komentotulkki {
         this.puskuri = "";
         this.onPitkaKomento = false;
     }
-    
-    public void otaVastaanKomento(String komento){
-        if (komento.length()==1){
-            lyhyt(komento);
-        }else{
-            pitka(komento);
-        }
-        this.logiikka.piirra();
-    }
-    
+
     /**
      * näppiksen kuuntelija kutsuu tätä metodia
      * @param komento painettu merkki
@@ -60,7 +51,7 @@ public class Komentotulkki {
             }else{
                 puskuri = puskuri + komento;
             }
-            ((TekstiPiirtaja)this.logiikka.getPiirtaja()).setPitkaKomento(puskuri);
+            this.logiikka.getPiirtaja().setPitkaKomento(puskuri);
             return;
         }
 
@@ -71,17 +62,29 @@ public class Komentotulkki {
         }
     }
     
-    private void lyhyt(String komento){
-        if (MOVE_CHARS.contains(komento)){
-            liiku(komento);
-        }
+    private void otaVastaanKomento(String komento){
         
-        // check for other chars
+        this.logiikka.piirra();   
     }
     
-    private void pitka(String komento){
-        System.out.println("sanoit: "+komento);
+    private void inventoryCommands(String cmd){
+        
     }
+    
+    private void peliKomennot(String komento){
+        if (komento.length()==1 && MOVE_CHARS.contains(komento)){
+            liiku(komento);
+            logiikka.piirra();
+            return;
+        }
+        switch (komento){
+            case "i":
+                logiikka.getPiirtaja().toggleInventory(); break;
+            default:
+                System.out.println("Tuntematon komento: "+ komento);
+        }        
+    }
+    
     
     private void liiku(String komento){
         int i = MOVE_CHARS.indexOf(komento);

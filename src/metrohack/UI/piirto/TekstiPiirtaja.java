@@ -166,11 +166,12 @@ public class TekstiPiirtaja implements Piirtaja{
     }
     
     @Override
-    public void naytaKomento(String komento){
-        this.pitkaKomento = komento;
-        piirra();
+    public void toggleInventory(){
+        
     }
     
+
+    @Override
     public void setPitkaKomento(String s){
         this.pitkaKomento = s;
         this.piirra();

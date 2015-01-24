@@ -13,6 +13,7 @@ package metrohack.UI.piirto;
 public interface Piirtaja {
     
     public void piirra();
-    public void naytaKomento(String komento);
+    public void setPitkaKomento(String komento);
     public void tulosta(String tuloste);
+    public void toggleInventory(); // translation pending
 }

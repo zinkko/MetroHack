@@ -26,8 +26,14 @@ public class GraafinenPiirtaja implements Piirtaja{
         
     }
     
+
     @Override
-    public void naytaKomento(String komento){
+    public void setPitkaKomento(String komento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void toggleInventory(){
         
     }
 }
