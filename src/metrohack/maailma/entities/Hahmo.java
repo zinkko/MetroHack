@@ -5,6 +5,7 @@
  */
 package metrohack.maailma.entities;
 
+import metrohack.maailma.Taso;
 import metrohack.maailma.Tiili;
 
 /**
@@ -19,6 +20,7 @@ public abstract class Hahmo {
     protected int vitutus; //hit points
     protected int x;
     protected int y;
+    protected Taso tasoNyt;
 
     public Hahmo(int vitutus, String nimi, int x, int y) {
         this.vitutus = vitutus;
@@ -34,6 +36,10 @@ public abstract class Hahmo {
             
         }
     }*/
+    
+    public void asetaTaso(Taso t){
+        tasoNyt = t;
+    }
     
     @Override
     public String toString(){

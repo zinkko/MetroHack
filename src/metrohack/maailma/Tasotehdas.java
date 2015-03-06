@@ -42,12 +42,15 @@ public class Tasotehdas {
         return taso;
     }
     
-    private void asetaHahmot(Taso t){
+    private void asetaHahmot(Taso t){;
         for (Huone h: t.huoneet()){
             int x = h.getX() + h.getLeveys()/2;
             int y = h.getY() + h.getPituus()/2;
+            Monsteri m = new Monsteri(10,"höyrykaivuri",x,y,1);
+            t.lisaaHahmo(m);
+            m.asetaTaso(t);
             
-            t.lisaaHahmo(new Monsteri(10,"höyrykaivuri",x,y,1));
+            
         }
     }
 
@@ -70,7 +73,7 @@ public class Tasotehdas {
                 }else{
                     taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
                     System.out.println(x+", "+y);
-                    taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x+ a/2+2 ,y+ b/2+2 ,1)); //koevaiheessa joka huoneeseen monsu
+                    //taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x+ a/2+2 ,y+ b/2+2 ,1)); //koevaiheessa joka huoneeseen monsu
                 }
                 n++;
             }
@@ -85,7 +88,7 @@ public class Tasotehdas {
         Huone toka;
         for (int i = 1; i < huoneet.size(); i++) {
             toka = huoneet.get(i);
-            int[] xypl = yhdysKaytava(eka, toka); // [x,y,pituus,leveys]
+            int[] xypl = yhdyskaytava(eka, toka); // [x,y,pituus,leveys]
             if (xypl != null) {
                 kaytavat.add(new Huone(taso.getTiilet(), xypl));
             } else {
@@ -95,9 +98,9 @@ public class Tasotehdas {
 
             eka = toka;
         }
-        int[] xypl1 = yhdysKaytava(huoneet.get(0), huoneet.get(3));
-        int[] xypl2 = yhdysKaytava(huoneet.get(2), huoneet.get(5));
-        int[] xypl3 = yhdysKaytava(huoneet.get(4), huoneet.get(7));
+        int[] xypl1 = yhdyskaytava(huoneet.get(0), huoneet.get(3));
+        int[] xypl2 = yhdyskaytava(huoneet.get(2), huoneet.get(5));
+        int[] xypl3 = yhdyskaytava(huoneet.get(4), huoneet.get(7));
         kaytavat.add(new Huone(taso.getTiilet(), xypl1));
         kaytavat.add(new Huone(taso.getTiilet(), xypl2));
         kaytavat.add(new Huone(taso.getTiilet(), xypl3));
@@ -105,7 +108,7 @@ public class Tasotehdas {
         huoneet.addAll(kaytavat);
     }
 
-    private int[] yhdysKaytava(Huone eka, Huone toka) {
+    private int[] yhdyskaytava(Huone eka, Huone toka) {
         int[] palauta = new int[4];
 
         boolean vertical = false;

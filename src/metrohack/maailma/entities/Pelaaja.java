@@ -16,7 +16,7 @@ public class Pelaaja extends Hahmo{
 	private int ruoka;
 	private Reppu reppu;
         private boolean testaustila = false;
-        private Taso tasoNyt;
+        //private Taso tasoNyt; lisäsin yläluokkaan
         //private MetroHack peli;
 	
 	public Pelaaja(int vitutus, String nimi, int x, int y){
@@ -27,9 +27,9 @@ public class Pelaaja extends Hahmo{
                 
 	}
         
-        public void vaihdaTasoa(Taso t){
-            this.tasoNyt = t;
-        }
+//        public void vaihdaTasoa(Taso t){
+//            this.tasoNyt = t;
+//        }
         
         public void setTestMode(boolean b){
             this.testaustila = b;
@@ -39,16 +39,17 @@ public class Pelaaja extends Hahmo{
             return this.reppu;
         }
         
-        public void liiku(int dx, int dy){
+        public boolean liiku(int dx, int dy){
             Tiilityyppi t = this.tasoNyt.getTiili(x+dx, y+dy);
             if (t == Tiilityyppi.SEINA && !testaustila){
                 //System.out.println("Wall!");
-                return; // don't walk trhu walls
+                return false; 
             }
             //System.out.println(t);
             this.x += dx;
             this.y += dy;
             //this.peli.tulosta(this.x+","+this.y);
+            return true;
         }
 
 }

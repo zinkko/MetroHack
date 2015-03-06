@@ -42,7 +42,7 @@ public class Pelilogiikka {
         this.pelaaja = new Pelaaja(20, "ilpo", 15, 25);
         tasoNyt = tehdas.luoTaso();
         
-        pelaaja.vaihdaTasoa(tasoNyt);
+        pelaaja.asetaTaso(tasoNyt);
     }
     
     public void setUI(UserInterface ui){

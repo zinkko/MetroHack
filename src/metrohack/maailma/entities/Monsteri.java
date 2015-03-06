@@ -7,6 +7,8 @@
 package metrohack.maailma.entities;
 
 import java.util.Random;
+import metrohack.maailma.Taso;
+import metrohack.maailma.Tiilityyppi;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Monsteri extends Hahmo {
     private final int nopeus; //nopeus per yksi vuoro
     private int tavoiteX;
     private int tavoiteY;
+    //private Taso tasoNyt; yläluokassa
     
     public Monsteri(int vitutus, String nimi, int x, int y, int nopeus){
         super(vitutus,nimi,x,y);
@@ -29,9 +32,22 @@ public class Monsteri extends Hahmo {
         return false;
     }
     
+//    public void vaihdaTasoa(Taso t){ //Tätä pitää kutsua jossakin!
+//        this.tasoNyt = t;
+//    }
+    
     //tän kun toteuttaa, niin homma ehkä toimii. tarvii vaan tiedon siitä, törmääkö liikkuessaan
-    private boolean liikuYksi(int muutosX, int muutosY){ 
-        return false;
+    private boolean liikuYksi(int dx, int dy){ 
+        if (tasoNyt==null) System.out.println("taso null");
+            Tiilityyppi t = super.tasoNyt.getTiili(x+dx, y+dy);
+            if (t == Tiilityyppi.SEINA){
+                return false; 
+            }
+            //System.out.println(t);
+            this.x += dx;
+            this.y += dy;
+            //this.peli.tulosta(this.x+","+this.y);
+            return true;
     }
     
     public void liiku(){
@@ -46,7 +62,7 @@ public class Monsteri extends Hahmo {
         
     }
     
-    public void liikuSatunnaisesti(){
+    public void liikuSatunnaisesti(){ // liiku """"satunnaisesti"""......
         if (Math.abs(tavoiteX-x) + Math.abs(tavoiteY-y)<10){
             arvoUusiSatunnainenPaikka();
         }

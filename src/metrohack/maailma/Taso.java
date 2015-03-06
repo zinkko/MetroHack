@@ -120,6 +120,7 @@ public class Taso {
     
     public void lisaaHahmo(Hahmo h){
         this.hahmot.add(h);
+        
     }
     
     public List<Hahmo> getHahmot(){

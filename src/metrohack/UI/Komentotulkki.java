@@ -63,7 +63,7 @@ public class Komentotulkki {
     }
     
     private void otaVastaanKomento(String komento){
-        
+        pelikomennot(komento);
         this.logiikka.piirra();   
     }
     
@@ -71,7 +71,7 @@ public class Komentotulkki {
         
     }
     
-    private void peliKomennot(String komento){
+    private void pelikomennot(String komento){
         if (komento.length()==1 && MOVE_CHARS.contains(komento)){
             liiku(komento);
             logiikka.piirra();
@@ -88,9 +88,10 @@ public class Komentotulkki {
     
     private void liiku(String komento){
         int i = MOVE_CHARS.indexOf(komento);
-        int x = i%3-1;
+        int x = i%3-1; //laske minne liikutaan ks n. rivi 25
         int y = -1*(i/3-1);
-        logiikka.getPelaaja().liiku(x, y);
-        logiikka.vuoro();
+        if (logiikka.getPelaaja().liiku(x, y)) {
+            logiikka.vuoro();
+        }
     }
 }

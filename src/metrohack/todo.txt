@@ -1,20 +1,27 @@
 FEATURET
 
-- tee hieno tasogeneraattori
+Summittainen tärkeysjärkkä:
+
+ILPO - tee hieno tasogeneraattori
     - mutkaiset käytävät
-    - max n huonetta jossa n<9
-    - lisää ankkoja
+    - max n huonetta jossa n<=9
+    - "maski" eli levusta näkyy vain huoneet, joissa käyty
+    - lisää ankkoja //onks tää varmasti tarpeellista?
 
-- lisää tilaa printeille
+-ILPO: - tasosiirtymät
+    - metrokartta:
+        - metrokarttamoodiin pääsee painamalla 'm',
+        jolloin näkyviin tulee se osa karttaa, jonka käyttäjä tietää jo. paluu sama nappi?
 
-- näytä HP ja nälkä muuta kivaa
+AINO - monsut liikkumaan ja törmäilemään
 
-- monsuja
+ lisää tilaa printeille
+
+
 
 - aseman (= levun) nimi näkyviin
 
-- tasosiirtymät
-    - metrokartta
+
 
 - rajapinnoita käli
     - UI rajapinnaksi
