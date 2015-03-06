@@ -1,6 +1,6 @@
-FEATURET
+FEATURET:
 
-Summittainen tärkeysjärkkä:
+Summittaisessa tärkeysjärkässä
 
 ILPO - tee hieno tasogeneraattori
     - mutkaiset käytävät
