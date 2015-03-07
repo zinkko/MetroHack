@@ -13,6 +13,8 @@ ILPO - tee hieno tasogeneraattori
         - metrokarttamoodiin pääsee painamalla 'm',
         jolloin näkyviin tulee se osa karttaa, jonka käyttäjä tietää jo. paluu sama nappi?
 
+ILPO: näkyviin pelaajahahmon statsit, nälkä yms
+
 AINO - monsut liikkumaan ja törmäilemään
 
  lisää tilaa printeille
@@ -30,9 +32,6 @@ AINO - monsut liikkumaan ja törmäilemään
 - inventaario
     - näytä reppu
     - käytä reppu
-
-- näkyvyyden rajoitus
-    -testimoodi
 
 
 BUGIT

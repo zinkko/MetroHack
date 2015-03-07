@@ -18,11 +18,11 @@ import java.util.Map;
  */
 public class Metrokartta {
     private Map<Taso,List<Linja>> yhteydet;
-    private List<Linja> metroLinjat;
+    private List<Linja> metrolinjat;
     
     public Metrokartta(){
         this.yhteydet = new HashMap<>();
-        this.metroLinjat = new ArrayList<>();
+        this.metrolinjat = new ArrayList<>();
     }
     
     public void lisaaAsema(Taso asema,List<Linja> metrot){

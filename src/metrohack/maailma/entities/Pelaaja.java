@@ -19,8 +19,8 @@ public class Pelaaja extends Hahmo{
         //private Taso tasoNyt; lisäsin yläluokkaan
         //private MetroHack peli;
 	
-	public Pelaaja(int vitutus, String nimi, int x, int y){
-		super(vitutus, nimi, x, y);
+	public Pelaaja(int vitutusMax, String nimi, int x, int y){
+		super(vitutusMax, nimi, x, y);
 		this.ruoka = 10;
 		this.reppu = new Reppu(10, 10);
                 this.merkki = '@';
@@ -51,5 +51,17 @@ public class Pelaaja extends Hahmo{
             //this.peli.tulosta(this.x+","+this.y);
             return true;
         }
+
+    public void paivita(int moneskoVuoro) {
+        if (vitutus > 0 && moneskoVuoro%7 == 0) { //hiilaaminen ajan mittaan
+            vitutus--;
+        } else if (moneskoVuoro%13 == 0) { //kovakoodattuja taikalukuja <3
+            ruoka--;
+        }
+        
+        if (vitutus >= vitutusMax || ruoka <= 0) {
+            //game over!
+        }
+    }
 
 }

@@ -19,6 +19,9 @@ public class Monsteri extends Hahmo {
     private final int nopeus; //nopeus per yksi vuoro
     private int tavoiteX;
     private int tavoiteY;
+    private int vanhaX;
+    private int vanhaY;
+    private int suunta; //kuin numeronäppäimistö, tästä joskus enum?
     //private Taso tasoNyt; yläluokassa
     
     public Monsteri(int vitutus, String nimi, int x, int y, int nopeus){
@@ -26,6 +29,9 @@ public class Monsteri extends Hahmo {
         //this.pelaaja = pelaaja;
         this.nopeus = nopeus;
         super.merkki = 'm';
+        this.suunta = new Random().nextInt(10)+1; //arvotaan default-suunta  
+        this.vanhaX = x;
+        this.vanhaY = y;
     }
     
     private boolean nakeekoPelaajan(){
@@ -38,16 +44,39 @@ public class Monsteri extends Hahmo {
     
     //tän kun toteuttaa, niin homma ehkä toimii. tarvii vaan tiedon siitä, törmääkö liikkuessaan
     private boolean liikuYksi(int dx, int dy){ 
-        if (tasoNyt==null) System.out.println("taso null");
+        //if (tasoNyt==null) System.out.println("taso null");
             Tiilityyppi t = super.tasoNyt.getTiili(x+dx, y+dy);
             if (t == Tiilityyppi.SEINA){
                 return false; 
             }
             //System.out.println(t);
+            
+            vanhaX = x;
+            vanhaY = y;
+            
             this.x += dx;
             this.y += dy;
             //this.peli.tulosta(this.x+","+this.y);
             return true;
+    }
+    
+    private void valitseSuunta(){
+        int dy = 0;
+        int dx = 0;
+        if (suunta < 4) {
+            dy++;
+        } else if (suunta > 6) {
+            dy--;
+        }
+        
+        if (suunta%3 == 0) {
+            dx++;
+        } else if (suunta%3 == 1) {
+            dx--;
+        }
+        if (!liikuYksi(dx, dy)) {
+            liikuYksi(-1 * dx, -1 * dy);
+        }
     }
     
     public void liiku(){
@@ -58,28 +87,40 @@ public class Monsteri extends Hahmo {
         }
     }
     
+    public void peruLiike() {
+        x = vanhaX;
+        y = vanhaY;
+    }
+    
     public void liikuKohtiPelaajaa(){
         
     }
     
-    public void liikuSatunnaisesti(){ // liiku """"satunnaisesti"""......
-        if (Math.abs(tavoiteX-x) + Math.abs(tavoiteY-y)<10){
-            arvoUusiSatunnainenPaikka();
+    public void liikuSatunnaisesti(){
+//        if (Math.abs(tavoiteX-x) + Math.abs(tavoiteY-y)<10){
+//            arvoUusiSatunnainenPaikka();
+//        }
+//        int muutosY = 0;
+//        int muutosX = 0;
+//        if (tavoiteX<x){
+//            muutosX--;
+//        } else if (tavoiteY<y){
+//            muutosY--;
+//        } else if (tavoiteX>x){
+//            muutosX++;
+//        } else if (tavoiteY>y){
+//            muutosY++;
+//        }
+        Random random = new Random();
+        if (random.nextDouble() < 0.5) { //puolet kerroista jatkaa samaan suuntaan kuin äsken
+            suunta = random.nextInt(10) + 1;
         }
-        int muutosY = 0;
-        int muutosX = 0;
-        if (tavoiteX<x){
-            muutosX--;
-        } else if (tavoiteY<y){
-            muutosY--;
-        } else if (tavoiteX>x){
-            muutosX++;
-        } else if (tavoiteY>y){
-            muutosY++;
-        }
-        if (!liikuYksi(muutosX, muutosY)){ //jos liikkuminen ei onnistu, kokeillaan eri suuntaan, jotta monsu ei ehkä jää jumiin
-            liikuYksi(-1*muutosX, -1*muutosY);
-        }
+        
+        valitseSuunta();
+//        
+//        if (!liikuYksi(muutosX, muutosY)){ //jos liikkuminen ei onnistu, kokeillaan eri suuntaan, jotta monsu ei ehkä jää jumiin
+//            liikuYksi(-1*muutosX, -1*muutosY);
+//        }
     }
     
     private void arvoUusiSatunnainenPaikka(){

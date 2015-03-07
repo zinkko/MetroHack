@@ -91,6 +91,7 @@ public class Komentotulkki {
         int x = i%3-1; //laske minne liikutaan ks n. rivi 25
         int y = -1*(i/3-1);
         if (logiikka.getPelaaja().liiku(x, y)) {
+            logiikka.getPelaaja().paivita(logiikka.getMoneskoVuoro());
             logiikka.vuoro();
         }
     }

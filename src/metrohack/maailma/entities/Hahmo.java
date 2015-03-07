@@ -17,13 +17,15 @@ public abstract class Hahmo {
     protected Tiili paikka;
     protected char merkki;
     protected String nimi;
-    protected int vitutus; //hit points
+    protected int vitutus; //hit points at the moment
+    protected int vitutusMax; //tässä kohtaa KUOLEE
     protected int x;
     protected int y;
     protected Taso tasoNyt;
 
-    public Hahmo(int vitutus, String nimi, int x, int y) {
-        this.vitutus = vitutus;
+    public Hahmo(int vitutusMax, String nimi, int x, int y) {
+        this.vitutus = 0; //aina aluksi nollaa
+        this.vitutusMax = vitutusMax;
         this.nimi = nimi;
         this.x = x;
         this.y = y;

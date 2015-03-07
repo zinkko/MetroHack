@@ -30,11 +30,13 @@ public class Pelilogiikka {
     private Pelaaja pelaaja;
     private final Tasotehdas tehdas;
     private Taso tasoNyt;
+    private int moneskoVuoro;
     
     public Pelilogiikka(Tasotehdas tehdas){
         this.tasot = new ArrayList<>();
         this.tehdas = tehdas;
         this.metrolinjat = new ArrayList<>();
+        this.moneskoVuoro = 0;
         alustaMaailma();
     }
     
@@ -50,12 +52,19 @@ public class Pelilogiikka {
     }
     
     public void vuoro(){
+        moneskoVuoro++;
         for (Hahmo h: this.tasoNyt.getHahmot()){
             if (h.getClass() == Monsteri.class){
                 ((Monsteri) h).liiku();
-                if (h.getX() == pelaaja.getX() && h.getY() == pelaaja.getY()){
-                    System.out.println("bump");
+//                if (h.getX() == pelaaja.getX() && h.getY() == pelaaja.getY()){
+//                    System.out.println("bump");
+//                }
+                for (Hahmo muu: this.tasoNyt.getHahmot()) {
+                    if (h.getX() == muu.getX() && h.getY() == muu.getY() && h != muu) {
+                        ((Monsteri) h).peruLiike();
+                    }
                 }
+                
             }
         }
         
@@ -88,6 +97,10 @@ public class Pelilogiikka {
     
     public Taso getTaso(){
         return this.tasoNyt;
+    }
+    
+    public int getMoneskoVuoro() {
+        return this.moneskoVuoro;
     }
     
     public Piirtaja getPiirtaja(){
