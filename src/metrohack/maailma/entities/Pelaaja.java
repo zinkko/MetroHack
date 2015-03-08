@@ -4,8 +4,7 @@
  */
 package metrohack.maailma.entities;
 
-import metrohack.MetroHack;
-import metrohack.maailma.Taso;
+import java.util.ArrayList;
 import metrohack.maailma.Tiilityyppi;
 
 /**
@@ -26,6 +25,8 @@ public class Pelaaja extends Hahmo{
                 this.merkki = '@';
                 
 	}
+        
+        
         
 //        public void vaihdaTasoa(Taso t){
 //            this.tasoNyt = t;
@@ -63,5 +64,26 @@ public class Pelaaja extends Hahmo{
             //game over!
         }
     }
+    
+    public int getRuoka(){
+        return this.ruoka;
+    }
+    
+    public ArrayList<String> getBuffNames(){
+        ArrayList<String> buffs = new ArrayList<>();
+        if (ruoka > 5) {
+            buffs.add("kylläinen");
+        } else {
+            buffs.add("nälkäinen");
+        }
+        buffs.add("ducks");
+        return buffs;
+    }
+
+    public String getNimi() {
+        return this.nimi;
+    }
+
+
 
 }

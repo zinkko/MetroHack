@@ -60,6 +60,14 @@ public abstract class Hahmo {
         return merkki;
     }
     
+    public int getVitutus(){
+        return this.vitutus;
+    }
+    
+    public void muutaVitutusta(int maara){
+        this.vitutus = Math.max(vitutus + maara, 0);
+    }
+    
     public boolean onkoPaikkaLaillinen(int x, int y){
         return false;
     }

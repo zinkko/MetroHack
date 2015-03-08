@@ -56,9 +56,9 @@ public class Pelilogiikka {
         for (Hahmo h: this.tasoNyt.getHahmot()){
             if (h.getClass() == Monsteri.class){
                 ((Monsteri) h).liiku();
-//                if (h.getX() == pelaaja.getX() && h.getY() == pelaaja.getY()){
-//                    System.out.println("bump");
-//                }
+                if (h.getX() == pelaaja.getX() && h.getY() == pelaaja.getY()){
+                    pelaaja.muutaVitutusta(1);
+                }
                 for (Hahmo muu: this.tasoNyt.getHahmot()) {
                     if (h.getX() == muu.getX() && h.getY() == muu.getY() && h != muu) {
                         ((Monsteri) h).peruLiike();

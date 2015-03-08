@@ -6,7 +6,6 @@
 
 package metrohack;
 
-import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import metrohack.UI.UserInterface;
 import metrohack.logiikka.Pelilogiikka;
@@ -33,8 +32,6 @@ public class MetroHack{
         logiikka.setUI(ui);
         SwingUtilities.invokeLater(ui);
         
-        ArrayList<String> a = new ArrayList<>();
-        a.forEach((s) -> System.out.println());
     }
     
 

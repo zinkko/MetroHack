@@ -6,6 +6,7 @@
 
 package metrohack.UI.piirto;
 
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import metrohack.logiikka.Pelilogiikka;
@@ -69,8 +70,19 @@ public class TekstiPiirtaja implements Piirtaja{
             kuva += '\n';
         }
         kuva += "\n";
-        kuva += "\tHP 10 | kylläinen | mana 7 | buffs | ducks";
+        kuva += statsbar();
         return kuva;
+    }
+    
+    
+    private String statsbar(){
+        Pelaaja p = this.peli.getPelaaja();
+        int hp = p.getVitutus();
+        //int mana = p.getMana();
+        ArrayList<String> buffs = p.getBuffNames();
+        String stats =  "\tHP "+hp+" | "+p.getNimi(); //+" | mana "+mana;
+        stats = buffs.stream().map((buff) -> " | "+buff).reduce(stats, String::concat);
+        return stats;
     }
     
     @Override
