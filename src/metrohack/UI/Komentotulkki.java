@@ -6,8 +6,7 @@
 
 package metrohack.UI;
 
-import metrohack.UI.piirto.TekstiPiirtaja;
-import metrohack.UI.piirto.Piirtaja;
+import java.util.function.Consumer;
 import metrohack.logiikka.Pelilogiikka;
 import metrohack.maailma.entities.Pelaaja;
 
@@ -17,7 +16,7 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class Komentotulkki {
     
-    private Pelilogiikka logiikka;
+    private final Pelilogiikka logiikka;
     private boolean onPitkaKomento;
     private String puskuri;
     
@@ -63,36 +62,8 @@ public class Komentotulkki {
     }
     
     private void otaVastaanKomento(String komento){
-        pelikomennot(komento);
-        this.logiikka.piirra();   
-    }
-    
-    private void inventoryCommands(String cmd){
-        
-    }
-    
-    private void pelikomennot(String komento){
-        if (komento.length()==1 && MOVE_CHARS.contains(komento)){
-            liiku(komento);
-            logiikka.piirra();
-            return;
-        }
-        switch (komento){
-            case "i":
-                logiikka.getPiirtaja().toggleInventory(); break;
-            default:
-                System.out.println("Tuntematon komento: "+ komento);
-        }        
-    }
-    
-    
-    private void liiku(String komento){
-        int i = MOVE_CHARS.indexOf(komento);
-        int x = i%3-1; //laske minne liikutaan ks n. rivi 25
-        int y = -1*(i/3-1);
-        if (logiikka.getPelaaja().liiku(x, y)) {
-            logiikka.getPelaaja().paivita(logiikka.getMoneskoVuoro());
-            logiikka.vuoro();
-        }
+        Consumer<Pelaaja> con = Komennot.hae(komento);
+        con.accept(logiikka.getPelaaja());
+        this.logiikka.piirra();
     }
 }
