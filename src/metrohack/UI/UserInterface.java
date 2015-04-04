@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import metrohack.logiikka.Pelilogiikka;
+import metrohack.maailma.entities.Pelaaja;
 
 /**
  *
@@ -58,14 +59,14 @@ public class UserInterface implements Runnable{
         System.out.println("Hello World!");
         this.piirtaja = new GraafinenPiirtaja();
         JPanel panel = new JPanel();
-        panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli),this));
+        panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli, this),this));
         c.add(panel);
     }
     
     private void luoTekstiKomponentit(Container c){
         System.out.println("Hello World!");
         JTextArea tekstikentta = new JTextArea();
-        Komentotulkki t = new Komentotulkki(peli);
+        Komentotulkki t = new Komentotulkki(peli, this);
         this.piirtaja = new TekstiPiirtaja(tekstikentta,100,30,this.peli);
         Kuuntelija k = new Kuuntelija(t,this);
         tekstikentta.setFont(new Font(this.fontName,Font.PLAIN,17));
@@ -91,5 +92,14 @@ public class UserInterface implements Runnable{
     public Piirtaja getPiirtaja(){
         return this.piirtaja;
     }
+    
+    void piirräReppu(Pelaaja pelaaja) {
+        this.piirtaja.piirräReppu(pelaaja.getReppu());
+    }
+
+    void piirräKartta(Pelaaja pelaaja) {
+        this.piirtaja.piirraKartta(pelaaja.getX(), pelaaja.getY());
+    }
+
 }
 

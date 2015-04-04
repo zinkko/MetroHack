@@ -19,33 +19,50 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class Komennot {
     
-    private static Map<String, Consumer<Pelaaja>> komennot = new HashMap<>();
+    private final Map<String, Consumer<Pelaaja>> komennot;
+    private final UserInterface ui;
     
-    static {
+    public Komennot(UserInterface ui) {
+        komennot = new HashMap<>();
+        this.ui = ui;
         setup();
     }
     
-    private static void setup(){
+    private void setup(){
         alustaLiikkumisKomennot();
+        komennot.put("i", näytäTavarat());
+        komennot.put("m", näytäKartta());
     }
     
-    private static void alustaLiikkumisKomennot(){
+    private void alustaLiikkumisKomennot(){
         Stream.of(Suunta.values()).forEach( (Suunta s) -> 
                 komennot.put(s.merkkijono(), liiku(s)));
     }
 
-    public static Consumer<Pelaaja> hae(String komento) {
+    public Consumer<Pelaaja> hae(String komento) {
         if (!komennot.containsKey(komento)) return ohjeet();
         return komennot.get(komento);
     }
     
-    private static Consumer<Pelaaja> liiku(Suunta suunta) {
+    private Consumer<Pelaaja> näytäTavarat() {
+        return pelaaja -> {
+            ui.piirräReppu(pelaaja);
+        };
+    }
+    
+    private Consumer<Pelaaja> näytäKartta() {
+        return pelaaja -> {
+            ui.piirräKartta(pelaaja);
+        };
+    }
+    
+    private Consumer<Pelaaja> liiku(Suunta suunta) {
         return pelaaja -> {
             pelaaja.liiku(suunta.getDx(), suunta.getDy());
         };
     }
     
-    private static Consumer<Pelaaja> ohjeet(){
+    private Consumer<Pelaaja> ohjeet(){
         return pelaaja -> {
             System.out.println("nämä ovat ohjeet");
         };

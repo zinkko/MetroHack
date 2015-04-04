@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import metrohack.logiikka.Pelilogiikka;
 import metrohack.maailma.entities.Hahmo;
 import metrohack.maailma.entities.Pelaaja;
+import metrohack.maailma.entities.Reppu;
 
 
 /**
@@ -198,4 +199,14 @@ public class TekstiPiirtaja implements Piirtaja{
         this.pitkaKomento = this.pitkaKomento.substring(0, this.pitkaKomento.length()-1);
         this.piirra();
     }*/
+
+    @Override
+    public void piirräReppu(Reppu reppu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void piirraKartta(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

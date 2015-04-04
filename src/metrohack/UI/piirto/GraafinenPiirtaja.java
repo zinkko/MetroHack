@@ -6,6 +6,8 @@
 
 package metrohack.UI.piirto;
 
+import metrohack.maailma.entities.Reppu;
+
 /**
  *
  * @author ilari
@@ -35,5 +37,15 @@ public class GraafinenPiirtaja implements Piirtaja{
     @Override
     public void toggleInventory(){
         
+    }
+
+    @Override
+    public void piirräReppu(Reppu reppu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void piirraKartta(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

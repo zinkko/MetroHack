@@ -22,16 +22,18 @@ public class Komentotulkki {
     
     private static final char KOMENTO_MERKKI = '$';
     private static final String MOVE_CHARS = "qweaxdzsc";
+    private Komennot komennot;
     /*
     * q w e \ ^ /
     * a x d < + >
     * z s c / v \
     */
 
-    public Komentotulkki(Pelilogiikka peli){
+    public Komentotulkki(Pelilogiikka peli, UserInterface ui){
         this.logiikka = peli;
         this.puskuri = "";
         this.onPitkaKomento = false;
+        this.komennot = new Komennot(ui);
     }
 
     /**
@@ -62,7 +64,7 @@ public class Komentotulkki {
     }
     
     private void otaVastaanKomento(String komento){
-        Consumer<Pelaaja> con = Komennot.hae(komento);
+        Consumer<Pelaaja> con = komennot.hae(komento);
         con.accept(logiikka.getPelaaja());
         this.logiikka.piirra();
     }
