@@ -64,8 +64,8 @@ public class Komentotulkki {
     }
     
     private void otaVastaanKomento(String komento){
-        Consumer<Pelaaja> con = komennot.hae(komento);
-        con.accept(logiikka.getPelaaja());
+        Consumer<Pelilogiikka> con = komennot.hae(komento);
+        con.accept(logiikka);
         this.logiikka.piirra();
     }
 }

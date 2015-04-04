@@ -206,7 +206,12 @@ public class TekstiPiirtaja implements Piirtaja{
     }
 
     @Override
-    public void piirraKartta(int x, int y) {
+    public void piirraKartta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void piirraOhjeet() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

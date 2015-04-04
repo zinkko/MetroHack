@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
+import metrohack.logiikka.Pelilogiikka;
 import metrohack.logiikka.Suunta;
-import metrohack.maailma.entities.Pelaaja;
 
 /**
  *
@@ -19,7 +19,7 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class Komennot {
     
-    private final Map<String, Consumer<Pelaaja>> komennot;
+    private final Map<String, Consumer<Pelilogiikka>> komennot;
     private final UserInterface ui;
     
     public Komennot(UserInterface ui) {
@@ -39,32 +39,32 @@ public class Komennot {
                 komennot.put(s.merkkijono(), liiku(s)));
     }
 
-    public Consumer<Pelaaja> hae(String komento) {
+    public Consumer<Pelilogiikka> hae(String komento) {
         if (!komennot.containsKey(komento)) return ohjeet();
         return komennot.get(komento);
     }
     
-    private Consumer<Pelaaja> näytäTavarat() {
-        return pelaaja -> {
-            ui.piirräReppu(pelaaja);
+    private Consumer<Pelilogiikka> näytäTavarat() {
+        return logic -> {
+            logic.getUI().piirräReppu();
         };
     }
     
-    private Consumer<Pelaaja> näytäKartta() {
-        return pelaaja -> {
-            ui.piirräKartta(pelaaja);
+    private Consumer<Pelilogiikka> näytäKartta() {
+        return logic -> {
+            logic.getUI().piirräKartta();
         };
     }
     
-    private Consumer<Pelaaja> liiku(Suunta suunta) {
-        return pelaaja -> {
-            pelaaja.liiku(suunta.getDx(), suunta.getDy());
+    private Consumer<Pelilogiikka> liiku(Suunta suunta) {
+        return logiikka -> {
+            logiikka.getPelaaja().liiku(suunta.getDx(), suunta.getDy());
         };
     }
     
-    private Consumer<Pelaaja> ohjeet(){
-        return pelaaja -> {
-            System.out.println("nämä ovat ohjeet");
+    private Consumer<Pelilogiikka> ohjeet(){
+        return logiikka -> {
+            logiikka.getUI().piirräOhjeet();
         };
     }
     

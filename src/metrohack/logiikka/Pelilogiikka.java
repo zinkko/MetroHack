@@ -106,4 +106,8 @@ public class Pelilogiikka {
     public Piirtaja getPiirtaja(){
         return this.ui.getPiirtaja();
     }
+
+    public UserInterface getUI() {
+        return this.ui;
+    }
 }

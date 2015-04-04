@@ -72,7 +72,7 @@ public class Tasotehdas {
                     //taso.lisaaTavara(tavarat.get(random.nextInt(9))); //joskus tästä tulee fiksu testaus...
                 }else{
                     taso.lisaaHuone(new Huone(taso.getTiilet(), x + a/2, y + b/2, pituus - a, leveys - b));
-                    System.out.println(x+", "+y);
+                    //System.out.println(x+", "+y);
                     //taso.lisaaHahmo(new Monsteri(10,"höyrykaivuri", x+ a/2+2 ,y+ b/2+2 ,1)); //koevaiheessa joka huoneeseen monsu
                 }
                 n++;

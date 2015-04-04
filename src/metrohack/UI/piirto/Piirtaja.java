@@ -21,5 +21,7 @@ public interface Piirtaja {
 
     public void piirräReppu(Reppu reppu);
 
-    public void piirraKartta(int x, int y);
+    public void piirraKartta();
+
+    public void piirraOhjeet();
 }

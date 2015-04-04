@@ -93,12 +93,16 @@ public class UserInterface implements Runnable{
         return this.piirtaja;
     }
     
-    void piirräReppu(Pelaaja pelaaja) {
-        this.piirtaja.piirräReppu(pelaaja.getReppu());
+    void piirräReppu() {
+        this.piirtaja.piirräReppu(this.peli.getPelaaja().getReppu());
     }
 
-    void piirräKartta(Pelaaja pelaaja) {
-        this.piirtaja.piirraKartta(pelaaja.getX(), pelaaja.getY());
+    void piirräKartta() {
+        this.piirtaja.piirraKartta();
+    }
+
+    void piirräOhjeet() {
+        this.piirtaja.piirraOhjeet();
     }
 
 }
