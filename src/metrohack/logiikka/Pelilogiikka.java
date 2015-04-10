@@ -9,7 +9,7 @@ package metrohack.logiikka;
 import java.util.ArrayList;
 import java.util.List;
 import metrohack.UI.piirto.Piirtaja;
-import metrohack.UI.UserInterface;
+import metrohack.UI.Käyttöliittymä;
 import metrohack.maailma.Linja;
 import metrohack.maailma.Taso;
 import metrohack.maailma.Tasotehdas;
@@ -24,7 +24,7 @@ import metrohack.maailma.entities.Pelaaja;
  */
 public class Pelilogiikka {
     
-    private UserInterface ui;
+    private Käyttöliittymä ui;
     private final List<Taso> tasot;
     private final List<Linja> metrolinjat;
     private Pelaaja pelaaja;
@@ -47,7 +47,7 @@ public class Pelilogiikka {
         pelaaja.asetaTaso(tasoNyt);
     }
     
-    public void setUI(UserInterface ui){
+    public void setUI(Käyttöliittymä ui){
         this.ui = ui;
     }
     
@@ -107,7 +107,7 @@ public class Pelilogiikka {
         return this.ui.getPiirtaja();
     }
 
-    public UserInterface getUI() {
+    public Käyttöliittymä getUI() {
         return this.ui;
     }
 }

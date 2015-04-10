@@ -21,7 +21,7 @@ import metrohack.maailma.entities.Pelaaja;
  *
  * @author ilari
  */
-public class UserInterface implements Runnable{
+public class Käyttöliittymä implements Runnable{
     
     private final JFrame frame;
     private final boolean isTextBased;
@@ -29,13 +29,13 @@ public class UserInterface implements Runnable{
     private Piirtaja piirtaja;
     private String fontName;
     
-    public UserInterface(Pelilogiikka peli, boolean isTextBased){
+    public Käyttöliittymä(Pelilogiikka peli, boolean isTextBased){
         this.frame = new JFrame("MetroHack");
         this.isTextBased = isTextBased;
         this.peli = peli;     
     }
     
-    public UserInterface(Pelilogiikka peli, String fontName){
+    public Käyttöliittymä(Pelilogiikka peli, String fontName){
         this(peli,true);
         this.fontName = fontName;
     }
@@ -45,32 +45,30 @@ public class UserInterface implements Runnable{
         frame.setPreferredSize(new Dimension(900,700));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        if (this.isTextBased){
+        //if (this.isTextBased){
             luoTekstiKomponentit(frame.getContentPane());
-        }else{
-            luoGraafisetKomponentit(frame.getContentPane());
-        }
+        //}else{
+        //    luoGraafisetKomponentit(frame.getContentPane());
+        //}
         frame.setVisible(true);
         frame.pack();
         this.piirra();
     }
     
-    private void luoGraafisetKomponentit(Container c){
-        System.out.println("Hello World!");
+    /*private void luoGraafisetKomponentit(Container c){
         this.piirtaja = new GraafinenPiirtaja();
         JPanel panel = new JPanel();
         panel.addKeyListener(new Kuuntelija(new Komentotulkki(peli, this),this));
         c.add(panel);
-    }
+    }*/
     
     private void luoTekstiKomponentit(Container c){
-        System.out.println("Hello World!");
         JTextArea tekstikentta = new JTextArea();
         Komentotulkki t = new Komentotulkki(peli, this);
-        this.piirtaja = new TekstiPiirtaja(tekstikentta,100,30,this.peli);
+        this.piirtaja = new TekstiPiirtaja(tekstikentta,100,30,this);
         Kuuntelija k = new Kuuntelija(t,this);
         tekstikentta.setFont(new Font(this.fontName,Font.PLAIN,17));
-        tekstikentta.setText("Hello World");
+        //tekstikentta.setText("Hello World");
         tekstikentta.addKeyListener(k);
         tekstikentta.setEditable(false);
         c.add(tekstikentta);
@@ -93,16 +91,12 @@ public class UserInterface implements Runnable{
         return this.piirtaja;
     }
     
-    void piirräReppu() {
-        this.piirtaja.piirräReppu(this.peli.getPelaaja().getReppu());
+    public void näytä(Näkymä näkymä){
+        this.piirtaja.vaihdaNäkymää(näkymä);
     }
 
-    void piirräKartta() {
-        this.piirtaja.piirraKartta();
-    }
-
-    void piirräOhjeet() {
-        this.piirtaja.piirraOhjeet();
+    public Pelilogiikka getLogiikka() {
+        return this.peli;
     }
 
 }

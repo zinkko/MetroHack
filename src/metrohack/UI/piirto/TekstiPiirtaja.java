@@ -9,7 +9,8 @@ package metrohack.UI.piirto;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import metrohack.logiikka.Pelilogiikka;
+import metrohack.UI.Näkymä;
+import metrohack.UI.Käyttöliittymä;
 import metrohack.maailma.entities.Hahmo;
 import metrohack.maailma.entities.Pelaaja;
 import metrohack.maailma.entities.Reppu;
@@ -19,21 +20,21 @@ import metrohack.maailma.entities.Reppu;
  *
  * @author ilari
  */
-public class TekstiPiirtaja implements Piirtaja{
+public class TekstiPiirtaja implements Piirtaja {
+    //private HashSet set;
     private int leveys,korkeus;
-    private Pelilogiikka peli;
+    private Käyttöliittymä ui;
     private JTextArea piirtoAlusta;
     private JPanel paneeli;
-    //private final int tulostusRivi = 25; //
     private String[] print;
     private String pitkaKomento = "";
-    private boolean enableFriendDuck = false;
+    private Näkymä näkymä;
     
-    public TekstiPiirtaja(JTextArea teksti,int w, int h, Pelilogiikka peli){
+    public TekstiPiirtaja(JTextArea teksti,int w, int h, Käyttöliittymä ui){
         this.piirtoAlusta = teksti;
         this.leveys = w;
         this.korkeus = h;
-        this.peli = peli;
+        this.ui = ui;
         this.print = new String[]{"hello","world","its","ilpo"};
     }
     
@@ -77,7 +78,7 @@ public class TekstiPiirtaja implements Piirtaja{
     
     
     private String statsbar(){
-        Pelaaja p = this.peli.getPelaaja();
+        Pelaaja p = this.ui.getLogiikka().getPelaaja();
         int hp = p.getVitutus();
         //int mana = p.getMana();
         ArrayList<String> buffs = p.getBuffNames();
@@ -123,95 +124,53 @@ public class TekstiPiirtaja implements Piirtaja{
     
     private void paivitaHuoneet(char[][] map){
 
-        peli.getCurrentLevel().piirra(map);
+        ui.getLogiikka().getCurrentLevel().piirra(map);
     }
     
     private void paivitaHahmot(char[][] map){
-        for (Hahmo h: peli.getTaso().getHahmot()){
+        for (Hahmo h: ui.getLogiikka().getTaso().getHahmot()){
             try{
                 map[h.getX()][h.getY()] = h.getMerkki();
             }catch(ArrayIndexOutOfBoundsException ex){
                 System.out.println("hahmo out of bounds" + h);
             }
         }
-        Pelaaja p = peli.getPelaaja();
+        Pelaaja p = ui.getLogiikka().getPelaaja();
         map[p.getX()][p.getY()] = '@';
 
     }
-    
-    public void piirraYstavaAnkka(){
-         this.enableFriendDuck = true;
-    }
-    
-    private void piirraYstavaAnkka(char[][] map){
-        map[4][10] = '<';
-        map[4][11] = '(';
-        map[4][12] = '^';
-        map[4][13] = ')';
-        map[5][11] = '(';
-        for (int i=12;i<15;i++){
-            map[5][i] = '_';
-        }
-        map[5][15] = ')';
-    }
+
     public String getKomento(){
         return this.pitkaKomento.substring(1);
     }
-    
-    private void piirraAnkka(char[][] map){
-        if (map==null){
-            this.piirtoAlusta.setText("wtf???");
-            return;
-        }
-        map[4][5] = '(';
-        map[4][6] = '^';
-        map[4][7] = ')';
-        map[4][8] = '>';
-        map[5][3] = '(';
-        for (int i=4;i<7;i++){
-            map[5][i] = '_';
-        }
-        map[5][7] = ')';
-        
-        if (this.enableFriendDuck){
-            piirraYstavaAnkka(map);
-        }
-    }
-    
-    @Override
-    public void toggleInventory(){
-        
-    }
-    
 
     @Override
     public void setPitkaKomento(String s){
         this.pitkaKomento = s;
         this.piirra();
     }
-    /*
-    public void addCharToCmd(char c){
-        this.pitkaKomento += c;
-        this.piirra();
-    }
-    
-    public void backspace(){
-        this.pitkaKomento = this.pitkaKomento.substring(0, this.pitkaKomento.length()-1);
-        this.piirra();
-    }*/
 
-    @Override
     public void piirräReppu(Reppu reppu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String kuva = "";
+        for (int i = 0; i < korkeus; i++) {
+            kuva += '|';
+            for (int j = 1; j < leveys-1; j++) {
+                if (i == 0 || i==korkeus-1){
+                    kuva += '_';
+                    continue;
+                }
+                kuva += '.';
+            }
+            kuva += "|\n";
+        }
+        this.piirtoAlusta.setText(kuva);
     }
 
     @Override
-    public void piirraKartta() {
+    public void vaihdaNäkymää(Näkymä seuraava) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void piirraOhjeet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ 
+
 }

@@ -16,7 +16,7 @@ public class Kuuntelija implements KeyListener {
 
     private final Komentotulkki tulkki;
 
-    public Kuuntelija(Komentotulkki t, UserInterface ui) {
+    public Kuuntelija(Komentotulkki t, Käyttöliittymä ui) {
         this.tulkki = t;
     }
 

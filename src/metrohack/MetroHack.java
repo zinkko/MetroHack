@@ -7,7 +7,7 @@
 package metrohack;
 
 import javax.swing.SwingUtilities;
-import metrohack.UI.UserInterface;
+import metrohack.UI.Käyttöliittymä;
 import metrohack.logiikka.Pelilogiikka;
 import metrohack.maailma.Tasotehdas;
 
@@ -28,7 +28,7 @@ public class MetroHack{
         
         Tasotehdas tehdas = new Tasotehdas();
         Pelilogiikka logiikka = new Pelilogiikka(tehdas);
-        UserInterface ui = new UserInterface(logiikka, font);
+        Käyttöliittymä ui = new Käyttöliittymä(logiikka, font);
         logiikka.setUI(ui);
         SwingUtilities.invokeLater(ui);
         

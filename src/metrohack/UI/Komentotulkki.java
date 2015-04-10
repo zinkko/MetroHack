@@ -29,7 +29,7 @@ public class Komentotulkki {
     * z s c / v \
     */
 
-    public Komentotulkki(Pelilogiikka peli, UserInterface ui){
+    public Komentotulkki(Pelilogiikka peli, Käyttöliittymä ui){
         this.logiikka = peli;
         this.puskuri = "";
         this.onPitkaKomento = false;

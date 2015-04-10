@@ -6,7 +6,7 @@
 
 package metrohack.UI.piirto;
 
-import metrohack.maailma.entities.Reppu;
+import metrohack.UI.Näkymä;
 
 /**
  *
@@ -17,11 +17,5 @@ public interface Piirtaja {
     public void piirra();
     public void setPitkaKomento(String komento);
     public void tulosta(String tuloste);
-    public void toggleInventory(); // translation pending
-
-    public void piirräReppu(Reppu reppu);
-
-    public void piirraKartta();
-
-    public void piirraOhjeet();
+    public void vaihdaNäkymää(Näkymä seuraava);
 }
